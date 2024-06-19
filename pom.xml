@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>hemmouda</groupId>
+    <artifactId>maze</artifactId>
+    <version>0.1</version>
+    <name>Maze client</name>
+    <description>The client part of the Maze project</description>
+    <url>https://git.fh-aachen.de/programmierpraktikum-ami/2024/hemmouda/maze</url>
+    <packaging>jar</packaging>
+    
+    <properties>
+        <main.class>hemmouda.maze.App</main.class>
+        <java.sourceDirectory>src/main/java</java.sourceDirectory>
+        <java.resourcesDirectory>src/main/resources</java.resourcesDirectory>
+        <java.version>20</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Maze server -->
+        <dependency>
+            <groupId>de.fhac.mazenet</groupId>
+            <artifactId>maze-server</artifactId>
+            <version>v2019.4</version>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>${java.sourceDirectory}</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>${java.resourcesDirectory}</directory>
+            </resource>
+        </resources>
+        
+        <defaultGoal>exec:java</defaultGoal>
+        
+        <plugins>
+            <!-- mvn compile -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+            
+            <!-- mvn exec:java -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

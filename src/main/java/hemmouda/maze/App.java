@@ -18,7 +18,7 @@ public interface App {
     public static void main(String[] args) throws Exception {
         Socket socket = new Socket("localhost", 5123);
         System.out.println("Connected");
-
+ 
         var in = new XmlInputStream(socket.getInputStream());
         var out = new XmlOutputStream(socket.getOutputStream());
 

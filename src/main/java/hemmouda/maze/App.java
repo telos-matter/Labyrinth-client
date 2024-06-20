@@ -1,5 +1,6 @@
 package hemmouda.maze;
 
+import de.fhac.mazenet.server.generated.ObjectFactory;
 import hemmouda.maze.communication.Communicator;
 import hemmouda.maze.util.Logger;
 
@@ -16,6 +17,11 @@ import hemmouda.maze.util.Logger;
  * will only be running 1 client.
  */
 public interface App {
+
+    /**
+     * An OF for the app. To please the app. :)
+     */
+    public static final ObjectFactory OF = new ObjectFactory();
 
     public static void main(String[] args) {
         Logger.info("Starting the application");

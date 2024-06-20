@@ -1,12 +1,16 @@
 package hemmouda.maze.communication.server;
 
+import de.fhac.mazenet.server.generated.ClientRole;
+import de.fhac.mazenet.server.generated.LoginMessageData;
+import de.fhac.mazenet.server.generated.MazeCom;
+import de.fhac.mazenet.server.generated.MazeComMessagetype;
 import de.fhac.mazenet.server.networking.XmlInputStream;
 import de.fhac.mazenet.server.networking.XmlOutputStream;
+import hemmouda.maze.App;
 import hemmouda.maze.communication.Communicator;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
 
-import java.io.IOException;
 import java.net.Socket;
 
 /**
@@ -36,7 +40,7 @@ public final class ServerCommunicator implements Communicator {
             in = new XmlInputStream(socket.getInputStream());
             out = new XmlOutputStream(socket.getOutputStream());
         } catch (Exception e) {
-            Logger.error("An error occurred while trying to establish a connection with the server at %s:%d because of `%s`.", Settings.SERVER_ADDRESS.getHostAddress(), Settings.SERVER_PORT, e.getMessage());
+            Logger.error("Unable to establish a connection with the server at %s:%d because of `%s`", Settings.SERVER_ADDRESS.getHostAddress(), Settings.SERVER_PORT, e);
             throw new RuntimeException(e);
         }
 
@@ -45,7 +49,44 @@ public final class ServerCommunicator implements Communicator {
 
     @Override
     public void beginGame() {
-        // TODO impl
-        throw new UnsupportedOperationException("Not yet implemented!");
+        login();
+    }
+
+    private void send (MazeCom message) {
+        try {
+            out.write(message);
+        } catch (Exception e) {
+            Logger.error("Unable to send this message `%s` because of `%s`", message, e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Blocks until message received
+     */
+    private MazeCom receive () {
+        try {
+            return in.readMazeCom();
+        } catch (Exception e) {
+            Logger.error("An error occurred while waiting for a message: `%s`", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Logs into the server
+     */
+    private void login () {
+        LoginMessageData loginMessage = App.OF.createLoginMessageData();
+        loginMessage.setName(Settings.PLAYER_NAME);
+        loginMessage.setRole(ClientRole.PLAYER);
+
+        MazeCom message = App.OF.createMazeCom();
+        message.setLoginMessage(loginMessage);
+        message.setMessagetype(MazeComMessagetype.LOGIN);
+
+        send(message);
+        var m = receive();
+        Logger.info("eyyyy %s", m.getMessagetype());
     }
 }

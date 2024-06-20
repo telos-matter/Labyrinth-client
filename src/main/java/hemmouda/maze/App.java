@@ -8,13 +8,14 @@ import hemmouda.maze.util.Logger;
  * Let make it clear from the start:
  * This app will be designed and developed
  * with the requirement in mind that
- * it will only ever run 1 single client at
+ * it will only ever run 1 single player at
  * a time. So there will be a lot
  * of singleton in here.
  * And all the parts are aware
- * and take that into their design
+ * and take into their design
  * that an instance of this App
- * will only be running 1 client.
+ * will only be running 1 player.
+ * One player. Not a manager.
  */
 public interface App {
 

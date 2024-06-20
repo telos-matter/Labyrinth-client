@@ -2,9 +2,12 @@ package hemmouda.maze.util;
 
 import hemmouda.maze.settings.Settings;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.SimpleFormatter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.*;
 
 /**
  * A simple logger.
@@ -24,7 +27,34 @@ public final class Logger {
             }
         };
         consoleHandler.setLevel(Level.ALL);
-        consoleHandler.setFormatter(new SimpleFormatter());
+        consoleHandler.setFormatter(new Formatter() {
+            private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm:ss a");
+
+            // Mainly copied from SimpleFormatter
+            @Override
+            public String format(LogRecord record) {
+                ZonedDateTime zdt = ZonedDateTime.ofInstant(record.getInstant(), ZoneId.systemDefault());
+                String formattedZdt = zdt.format(DATE_TIME_FORMATTER);
+
+                String message = formatMessage(record);
+
+                String throwable = "";
+                if (record.getThrown() != null) {
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    pw.println();
+                    record.getThrown().printStackTrace(pw);
+                    pw.close();
+                    throwable = sw.toString();
+                }
+
+                return "[%s] %s: %s%n%s".formatted(
+                        formattedZdt,
+                        record.getLevel().getLocalizedName(),
+                        message,
+                        throwable);
+            }
+        });
 
         logger.addHandler(consoleHandler);
         logger.setLevel(Level.ALL);

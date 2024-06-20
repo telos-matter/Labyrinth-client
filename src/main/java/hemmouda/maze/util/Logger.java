@@ -34,21 +34,43 @@ public final class Logger {
         logger.log(level, String.valueOf(any));
     }
 
+    private static void log (Level level, String format, Object ... objects) {
+        log(level, String.format(format, objects));
+    }
+
     public static void error (Object any) {
         log(Level.SEVERE, any);
+    }
+
+    public static void error (String format, Object ... objects) {
+        log(Level.SEVERE, format, objects);
     }
 
     public static void warning (Object any) {
         log(Level.WARNING, any);
     }
 
+    public static void warning (String format, Object ... objects) {
+        log(Level.WARNING, format, objects);
+    }
+
     public static void info (Object any) {
         log(Level.INFO, any);
+    }
+
+    public static void info (String format, Object ... objects) {
+        log(Level.INFO, format, objects);
     }
 
     public static void debug (Object any) {
         if (Settings.DEBUG) {
             log(Level.FINE, any);
+        }
+    }
+
+    public static void debug (String format, Object ... objects) {
+        if (Settings.DEBUG) {
+            log(Level.FINE, format, objects);
         }
     }
 

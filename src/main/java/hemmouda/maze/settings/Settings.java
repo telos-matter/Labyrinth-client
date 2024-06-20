@@ -1,6 +1,8 @@
 package hemmouda.maze.settings;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Properties;
 
 /**
@@ -12,6 +14,12 @@ public final class Settings {
     public static final boolean DEBUG;
 
     public static final String PLAYER_NAME;
+
+    public static final boolean LOCAL_COMMUNICATION;
+
+    public static final InetAddress SERVER_ADDRESS;
+
+    public static final int SERVER_PORT;
 
     // Initializes the values from the config file.
     // If an error occurred it uses the default values.
@@ -27,8 +35,17 @@ public final class Settings {
         }
 
         // Initialize. Better not have any wrong values in the config file
-        DEBUG = Boolean.parseBoolean(prop.getProperty("DEBUG", "true"));
-        PLAYER_NAME = prop.getProperty("PLAYER_NAME", "HEMMOUDA Aymane");
+        try {
+            DEBUG = Boolean.parseBoolean(prop.getProperty("DEBUG", "true"));
+            PLAYER_NAME = prop.getProperty("PLAYER_NAME", "HEMMOUDA Aymane");
+            LOCAL_COMMUNICATION = Boolean.parseBoolean(prop.getProperty("LOCAL_COMMUNICATION", "false"));
+            SERVER_ADDRESS = InetAddress.getByName(prop.getProperty("SERVER_ADDRESS", "127.0.0.1"));
+            SERVER_PORT = Integer.parseInt(prop.getProperty("SERVER_PORT", "5123"));
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

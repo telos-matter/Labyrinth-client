@@ -8,6 +8,10 @@ import de.fhac.mazenet.server.generated.MazeComMessagetype;
  */
 public class UnexpectedResponse extends RuntimeException {
 
+    public UnexpectedResponse (MazeCom received) {
+        super("Was not expecting this message: `%s`".formatted(received.getMessagetype()));
+    }
+
     public UnexpectedResponse (MazeCom received, MazeComMessagetype expected) {
         super("Received `%s`. But was expecting `%s`".formatted(received.getMessagetype(), expected));
     }

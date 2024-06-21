@@ -2,6 +2,7 @@ package hemmouda.maze;
 
 import de.fhac.mazenet.server.generated.ObjectFactory;
 import hemmouda.maze.communication.Communicator;
+import hemmouda.maze.game.Game;
 import hemmouda.maze.util.Logger;
 
 /**
@@ -26,6 +27,8 @@ public interface App {
 
     public static void main(String[] args) {
         Logger.info("Starting the application");
+
+        Game.initialize();
 
         Communicator communicator = Communicator.getCommunicator();
         communicator.initialize();

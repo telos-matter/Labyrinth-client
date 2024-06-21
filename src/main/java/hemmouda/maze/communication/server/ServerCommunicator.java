@@ -1,13 +1,11 @@
 package hemmouda.maze.communication.server;
 
-import de.fhac.mazenet.server.generated.ClientRole;
-import de.fhac.mazenet.server.generated.LoginMessageData;
-import de.fhac.mazenet.server.generated.MazeCom;
-import de.fhac.mazenet.server.generated.MazeComMessagetype;
+import de.fhac.mazenet.server.generated.*;
 import de.fhac.mazenet.server.networking.XmlInputStream;
 import de.fhac.mazenet.server.networking.XmlOutputStream;
 import hemmouda.maze.App;
 import hemmouda.maze.communication.Communicator;
+import hemmouda.maze.game.Game;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
 import hemmouda.maze.util.exceptions.UnexpectedResponse;
@@ -55,12 +53,14 @@ public final class ServerCommunicator implements Communicator {
             throw new RuntimeException(e);
         }
 
-        Logger.info("ServerCommunicator initialized successfully");
+        Logger.info("ServerCommunicator initialized successfully and connection has been established");
     }
 
     @Override
     public void beginGame() {
         login();
+
+        // TODO continue implementing
     }
 
     private void send (MazeCom message) {
@@ -108,6 +108,9 @@ public final class ServerCommunicator implements Communicator {
             throw new UnexpectedResponse(response, MazeComMessagetype.LOGINREPLY);
         }
 
-        // TODO continue implementing
+        LoginReplyMessageData loginReplyMessage = response.getLoginReplyMessage();
+        Game.setPlayerId(loginReplyMessage.getNewID());
+
+        Logger.info("Logged into the game successfully");
     }
 }

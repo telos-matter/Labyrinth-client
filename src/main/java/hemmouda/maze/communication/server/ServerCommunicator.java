@@ -6,6 +6,7 @@ import de.fhac.mazenet.server.networking.XmlOutputStream;
 import hemmouda.maze.App;
 import hemmouda.maze.communication.Communicator;
 import hemmouda.maze.game.Game;
+import hemmouda.maze.game.GameStatus;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
 import hemmouda.maze.util.exceptions.UnexpectedResponse;
@@ -53,14 +54,38 @@ public final class ServerCommunicator implements Communicator {
             throw new RuntimeException(e);
         }
 
-        Logger.info("ServerCommunicator initialized successfully and connection has been established");
+        Logger.info("ServerCommunicator initialized successfully");
     }
 
     @Override
     public void beginGame() {
         login();
+        // Once you log in, the game could be considered as
+        // started even if the other players are yet
+        // to connect
+        Game.gameStarted();
 
-        // TODO continue implementing
+        while (Game.getStatus().equals(GameStatus.IN_PROGRESS)) {
+            MazeCom message = receive();
+            switch (message.getMessagetype()) {
+                case AWAITMOVE -> answerAwaitMove(message.getAwaitMoveMessage());
+                case MOVEINFO -> processMoveInfo(message.getMoveInfoMessage());
+                case WIN -> processWin(message.getWinMessage());
+                case DISCONNECT -> processDisconnect(message.getDisconnectMessage()); // Normally shouldn't get it
+                default -> {
+                    // Since TCP keeps the order of the messages,
+                    // no message from the AwaitMove loop for example
+                    // should come up here. And those are the only
+                    // messages that should ever be handled here.
+                    if (Settings.DEBUG) {
+                        Logger.error("An unexpected message of type `%s` in the game loop!", message.getMessagetype());
+                        throw new UnexpectedResponse(message);
+                    } else {
+                        Logger.warning("An unexpected message of type `%s` in the game loop! Will continue..", message.getMessagetype());
+                    }
+                }
+            }
+        }
     }
 
     private void send (MazeCom message) {
@@ -113,4 +138,21 @@ public final class ServerCommunicator implements Communicator {
 
         Logger.info("Logged into the game successfully");
     }
+
+    private void answerAwaitMove (AwaitMoveMessageData awaitMoveMessage) {
+        throw new UnsupportedOperationException("Not yet implemented!");
+    }
+
+    private void processMoveInfo (MoveInfoData moveInfo) {
+        throw new UnsupportedOperationException("Not yet implemented!");
+    }
+
+    private void processWin (WinMessageData winMessage) {
+        throw new UnsupportedOperationException("Not yet implemented!");
+    }
+
+    private void processDisconnect (DisconnectMessageData disconnectMessage) {
+        throw new UnsupportedOperationException("Not yet implemented!");
+    }
+
 }

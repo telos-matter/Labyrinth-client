@@ -10,11 +10,22 @@ import hemmouda.maze.App;
 import hemmouda.maze.communication.Communicator;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
+import hemmouda.maze.util.exceptions.UnexpectedResponse;
 
 import java.net.Socket;
 
 /**
- * Communicates with the actual server over TCP
+ * Communicates with the actual server over TCP.
+ *
+ * The communication is not error tolerant, and
+ * is not designed to be able to recover from one. I mean
+ * we are not communicating with a space shuttle.
+ * Plus if an error occurred and I get disconnected I
+ * automatically lose the game, so.
+ *
+ * Also, the communication will be happening on the
+ * main thread so if an error occurred it'll stop
+ * the application.
  */
 public final class ServerCommunicator implements Communicator {
 
@@ -56,7 +67,7 @@ public final class ServerCommunicator implements Communicator {
         try {
             out.write(message);
         } catch (Exception e) {
-            Logger.error("Unable to send this message `%s` because of `%s`", message, e);
+            Logger.error("Unable to send MazeCom message of type `%s` because of `%s`", message.getMessagetype(), e);
             throw new RuntimeException(e);
         }
     }
@@ -74,7 +85,9 @@ public final class ServerCommunicator implements Communicator {
     }
 
     /**
-     * Logs into the server
+     * Logs into the server.
+     * Only login when the game already starts
+     * on the server big man.
      */
     private void login () {
         LoginMessageData loginMessage = App.OF.createLoginMessageData();
@@ -86,7 +99,15 @@ public final class ServerCommunicator implements Communicator {
         message.setMessagetype(MazeComMessagetype.LOGIN);
 
         send(message);
-        var m = receive();
-        Logger.info("eyyyy %s", m.getMessagetype());
+        MazeCom response = receive();
+
+        // If it's anything other than LoginReply, probably Disconnect
+        // then it's most likely because the game has yet to start
+        if (!response.getMessagetype().equals(MazeComMessagetype.LOGINREPLY)) {
+            Logger.error("Unable to log into the game. Probably because the game hasn't started yet.");
+            throw new UnexpectedResponse(response, MazeComMessagetype.LOGINREPLY);
+        }
+
+        // TODO continue implementing
     }
 }

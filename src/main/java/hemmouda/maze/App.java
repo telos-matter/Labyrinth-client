@@ -20,7 +20,7 @@ import hemmouda.maze.util.Logger;
 public interface App {
 
     /**
-     * An OF for the app. To please the app. :)
+     * An OF for the whole app :)
      */
     public static final ObjectFactory OF = new ObjectFactory();
 

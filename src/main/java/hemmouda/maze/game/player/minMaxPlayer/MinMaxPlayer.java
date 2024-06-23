@@ -7,7 +7,7 @@ import hemmouda.maze.game.player.Player;
 /**
  * A player that gets the best move with a MinMax algorithm
  */
-public final class MinMaxPlayer implements Player {
+public final class MinMaxPlayer extends Player {
 
     private static MinMaxPlayer instance;
 

@@ -26,7 +26,8 @@ public final class GameInfo {
 
     public static void setPlayerId (int id) {
         if (playerId != -1) {
-            Logger.warning("PlayerId has already been set to %d and now it's being changed to %d", playerId, id); // Who could set it again? IDK
+            Logger.error("PlayerId has already been set to %d. Can't change it.", playerId); // Who could set it again? IDK
+            throw new IllegalStateException("PlayerId has already been set.");
         }
         playerId = id;
     }

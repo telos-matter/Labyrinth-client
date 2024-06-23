@@ -36,15 +36,4 @@ public interface Communicator {
      */
     public abstract void beginGame();
 
-    /**
-     * @return the used Communicator
-     */
-    public static Communicator getCommunicator () {
-        if (Settings.LOCAL_COMMUNICATION) {
-            return LocalCommunicator.getInstance();
-        } else {
-            return ServerCommunicator.getInstance();
-        }
-    }
-
 }

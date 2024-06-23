@@ -10,7 +10,7 @@ import de.fhac.mazenet.server.generated.MoveMessageData;
  * move for the given state of the
  * board.
  */
-public interface Player {
+public abstract class Player {
 
     public abstract void initialize ();
 

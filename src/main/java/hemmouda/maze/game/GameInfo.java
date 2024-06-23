@@ -3,8 +3,8 @@ package hemmouda.maze.game;
 import hemmouda.maze.util.Logger;
 
 /**
- * Represents the game from the perspective of
- * this player.
+ * A record for the current information about the
+ * game.
  */
 public final class GameInfo {
 
@@ -21,7 +21,7 @@ public final class GameInfo {
         status = GameStatus.PREPARING;
         turnsCount = 0;
 
-        Logger.info("Game has been initialized");
+        Logger.info("GameInfo has been initialized");
     }
 
     public static void setPlayerId (int id) {

@@ -1,9 +1,5 @@
 package hemmouda.maze.communication;
 
-import hemmouda.maze.communication.local.LocalCommunicator;
-import hemmouda.maze.communication.server.ServerCommunicator;
-import hemmouda.maze.settings.Settings;
-
 /**
  * An interface to abstract away the relation
  * between the communication and the player.

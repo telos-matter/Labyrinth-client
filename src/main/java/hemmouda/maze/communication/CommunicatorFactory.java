@@ -18,6 +18,8 @@ public final class CommunicatorFactory {
             } else {
                 usedCommunicator = ServerCommunicator.getInstance();
             }
+
+            usedCommunicator.initialize();
         }
 
         return usedCommunicator;

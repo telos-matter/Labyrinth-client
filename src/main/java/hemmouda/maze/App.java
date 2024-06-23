@@ -33,7 +33,6 @@ public interface App {
         GameInfo.initialize();
 
         Communicator communicator = CommunicatorFactory.getCommunicator();
-        communicator.initialize();
         communicator.beginGame();
 
         Logger.info("Ending the application");

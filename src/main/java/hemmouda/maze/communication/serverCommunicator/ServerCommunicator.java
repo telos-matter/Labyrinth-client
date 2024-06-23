@@ -153,11 +153,17 @@ public final class ServerCommunicator implements Communicator {
         send(response);
 
         // Await accept
-        MazeCom accept = receive();
-        if (!accept.getMessagetype().equals(MazeComMessagetype.ACCEPT)) {
-            Logger.error("Move not accepted! Received: `%s`", accept.getMessagetype());
-            throw new UnexpectedResponse(accept, MazeComMessagetype.ACCEPT);
+        MazeCom acceptCom = receive();
+        if (!acceptCom.getMessagetype().equals(MazeComMessagetype.ACCEPT)) {
+            Logger.error("Unexpected response type to a moveMessage! Received: `%s`", acceptCom.getMessagetype());
+            throw new UnexpectedResponse(acceptCom, MazeComMessagetype.ACCEPT);
         }
+        AcceptMessageData acceptMessage = acceptCom.getAcceptMessage();
+        if (!acceptMessage.getErrortypeCode().equals(Errortype.NOERROR)) {
+            Logger.error("Move not accepted! Reason: `%s`", acceptMessage.getErrortypeCode());
+            throw new RuntimeException("Go fix your player. Move was not accepted.");
+        }
+
         Logger.info("Move accepted! Finishing turn");
     }
 

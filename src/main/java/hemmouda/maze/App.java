@@ -32,7 +32,7 @@ public interface App {
         Logger.info("Starting the application");
 
         GameInfo.initialize();
-        PlayerFactory.getPlayer(); // To initialize it before beginning
+        PlayerFactory.getPlayer(); // To have it already initialized before starting
 
         Communicator communicator = CommunicatorFactory.getCommunicator();
         communicator.beginGame();

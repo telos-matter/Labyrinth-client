@@ -140,7 +140,6 @@ public final class ServerCommunicator implements Communicator {
         Logger.info("Logged into the game successfully");
     }
 
-    // TODO refactor package names to localComm and serverComm
     private void answerAwaitMove (AwaitMoveMessageData awaitMoveMessage) {
         // Update game
         GameInfo.newTurn();
@@ -151,9 +150,11 @@ public final class ServerCommunicator implements Communicator {
         response.setMoveMessage(move);
         response.setMessagetype(MazeComMessagetype.MOVE);
         response.setId(GameInfo.getPlayerId()); // TODO see what happens if you don't send this
+        send(response);
 
         // Await accept
         MazeCom accept = receive(); // TODO check if they send id back
+//        Logger.debug("Id back? %d", accept.getId());
         if (!accept.getMessagetype().equals(MazeComMessagetype.ACCEPT)) {
             Logger.error("Move not accepted! Received: `%s`", accept.getMessagetype());
             throw new UnexpectedResponse(accept, MazeComMessagetype.ACCEPT);

@@ -24,6 +24,8 @@ public final class PlayerFactory {
                     throw new IllegalArgumentException("Unknown player type `%s`".formatted(Settings.PLAYER));
                 }
             };
+
+            usedPlayer.initialize();
         }
 
         return usedPlayer;

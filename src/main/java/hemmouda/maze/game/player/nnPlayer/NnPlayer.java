@@ -7,7 +7,7 @@ import hemmouda.maze.game.player.Player;
 /**
  * A Neural Network player.
  */
-public final class NnPlayer implements Player {
+public final class NnPlayer extends Player {
 
     private static NnPlayer instance;
 

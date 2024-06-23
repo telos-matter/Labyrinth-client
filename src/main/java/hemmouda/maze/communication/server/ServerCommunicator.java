@@ -1,5 +1,6 @@
 package hemmouda.maze.communication.server;
 
+import de.fhac.mazenet.server.game.Game;
 import de.fhac.mazenet.server.generated.*;
 import de.fhac.mazenet.server.networking.XmlInputStream;
 import de.fhac.mazenet.server.networking.XmlOutputStream;
@@ -7,6 +8,7 @@ import hemmouda.maze.App;
 import hemmouda.maze.communication.Communicator;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.GameStatus;
+import hemmouda.maze.game.player.PlayerFactory;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
 import hemmouda.maze.util.exceptions.UnexpectedResponse;
@@ -139,8 +141,25 @@ public final class ServerCommunicator implements Communicator {
         Logger.info("Logged into the game successfully");
     }
 
+    // TODO refactor package names to localComm and serverComm
     private void answerAwaitMove (AwaitMoveMessageData awaitMoveMessage) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        // Update game
+        GameInfo.newTurn();
+
+        // Get move and respond
+        MoveMessageData move = PlayerFactory.getPlayer().getMove(awaitMoveMessage);
+        MazeCom response = App.OF.createMazeCom();
+        response.setMoveMessage(move);
+        response.setMessagetype(MazeComMessagetype.MOVE);
+        response.setId(GameInfo.getPlayerId()); // TODO see what happens if you don't send this
+
+        // Await accept
+        MazeCom accept = receive(); // TODO check if they send id back
+        if (!accept.getMessagetype().equals(MazeComMessagetype.ACCEPT)) {
+            Logger.error("Move not accepted! Received: `%s`", accept.getMessagetype());
+            throw new UnexpectedResponse(accept, MazeComMessagetype.ACCEPT);
+        }
+        Logger.info("Move accepted! Finishing turn");
     }
 
     private void processMoveInfo (MoveInfoData moveInfo) {

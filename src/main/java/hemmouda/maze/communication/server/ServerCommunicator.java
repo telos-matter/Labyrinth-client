@@ -5,7 +5,7 @@ import de.fhac.mazenet.server.networking.XmlInputStream;
 import de.fhac.mazenet.server.networking.XmlOutputStream;
 import hemmouda.maze.App;
 import hemmouda.maze.communication.Communicator;
-import hemmouda.maze.game.Game;
+import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.GameStatus;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
@@ -63,9 +63,9 @@ public final class ServerCommunicator implements Communicator {
         // Once you log in, the game could be considered as
         // started even if the other players are yet
         // to connect
-        Game.gameStarted();
+        GameInfo.gameStarted();
 
-        while (Game.getStatus().equals(GameStatus.IN_PROGRESS)) {
+        while (GameInfo.getStatus().equals(GameStatus.IN_PROGRESS)) {
             MazeCom message = receive();
             switch (message.getMessagetype()) {
                 case AWAITMOVE -> answerAwaitMove(message.getAwaitMoveMessage());
@@ -134,7 +134,7 @@ public final class ServerCommunicator implements Communicator {
         }
 
         LoginReplyMessageData loginReplyMessage = response.getLoginReplyMessage();
-        Game.setPlayerId(loginReplyMessage.getNewID());
+        GameInfo.setPlayerId(loginReplyMessage.getNewID());
 
         Logger.info("Logged into the game successfully");
     }

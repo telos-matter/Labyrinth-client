@@ -20,8 +20,4 @@ public interface Player {
      */
     public abstract MoveMessageData getMove (AwaitMoveMessageData message);
 
-    public static Player getPlayer () {
-        throw new UnsupportedOperationException("Not yet implemented!");
-    }
-
 }

@@ -17,6 +17,8 @@ public class LocalCommunicator implements Communicator {
         return instance;
     }
 
+    private LocalCommunicator () {}
+
     @Override
     public void initialize() {
         throw new UnsupportedOperationException("Not yet implemented!");

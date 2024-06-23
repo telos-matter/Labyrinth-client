@@ -13,10 +13,16 @@ import hemmouda.maze.settings.Settings;
  * will be the server. (I may implement
  * the game logic here if end up
  * implementing a NN so that it can
- * be train fast and not over TCP. If I
+ * be trained fast and not over TCP. If I
  * do then
  * the receiving end will be that part
  * of the application and not the server)
+ *
+ * The communicator is also the
+ * orchestrator of this, it updates
+ * the game, asks the Player
+ * for a move in this scenario
+ * and so on.
  */
 public interface Communicator {
 

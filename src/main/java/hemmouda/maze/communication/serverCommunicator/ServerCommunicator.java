@@ -149,7 +149,7 @@ public final class ServerCommunicator implements Communicator {
         MazeCom response = App.OF.createMazeCom();
         response.setMoveMessage(move);
         response.setMessagetype(MazeComMessagetype.MOVE);
-        response.setId(GameInfo.getPlayerId()); // TODO see what happens if you don't send this
+        response.setId(GameInfo.getPlayerId());
         send(response);
 
         // Await accept

@@ -1,6 +1,5 @@
-package hemmouda.maze.communication.server;
+package hemmouda.maze.communication.serverCommunicator;
 
-import de.fhac.mazenet.server.game.Game;
 import de.fhac.mazenet.server.generated.*;
 import de.fhac.mazenet.server.networking.XmlInputStream;
 import de.fhac.mazenet.server.networking.XmlOutputStream;

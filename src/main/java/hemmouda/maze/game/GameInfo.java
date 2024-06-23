@@ -6,7 +6,7 @@ import hemmouda.maze.util.Logger;
  * Represents the game from the perspective of
  * this player.
  */
-public final class Game {
+public final class GameInfo {
 
     private static int playerId;
 

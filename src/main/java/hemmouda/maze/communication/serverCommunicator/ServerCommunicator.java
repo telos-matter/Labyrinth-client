@@ -153,8 +153,7 @@ public final class ServerCommunicator implements Communicator {
         send(response);
 
         // Await accept
-        MazeCom accept = receive(); // TODO check if they send id back
-//        Logger.debug("Id back? %d", accept.getId());
+        MazeCom accept = receive();
         if (!accept.getMessagetype().equals(MazeComMessagetype.ACCEPT)) {
             Logger.error("Move not accepted! Received: `%s`", accept.getMessagetype());
             throw new UnexpectedResponse(accept, MazeComMessagetype.ACCEPT);

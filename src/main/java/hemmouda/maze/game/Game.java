@@ -8,12 +8,18 @@ import hemmouda.maze.util.Logger;
  */
 public final class Game {
 
-    private static GameStatus status;
     private static int playerId;
 
+    private static GameStatus status;
+    /**
+     * How many turns have I played
+     */
+    private static int turnsCount;
+
     public static void initialize () {
-        status = GameStatus.PREPARING;
         playerId = -1;
+        status = GameStatus.PREPARING;
+        turnsCount = 0;
 
         Logger.info("Game has been initialized");
     }
@@ -39,6 +45,10 @@ public final class Game {
 
     public static GameStatus getStatus () {
         return status;
+    }
+
+    public static int getTurnsCount () {
+        return turnsCount;
     }
 
 }

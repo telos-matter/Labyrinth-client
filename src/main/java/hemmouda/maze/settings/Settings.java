@@ -21,6 +21,8 @@ public final class Settings {
 
     public static final int SERVER_PORT;
 
+    public static final String PLAYER;
+
     // Initializes the values from the config file.
     // If an error occurred it uses the default values.
     static {
@@ -41,7 +43,8 @@ public final class Settings {
             LOCAL_COMMUNICATION = Boolean.parseBoolean(prop.getProperty("LOCAL_COMMUNICATION", "false"));
             SERVER_ADDRESS = InetAddress.getByName(prop.getProperty("SERVER_ADDRESS", "127.0.0.1"));
             SERVER_PORT = Integer.parseInt(prop.getProperty("SERVER_PORT", "5123"));
-            
+            PLAYER = prop.getProperty("PLAYER", "RANDOM").toUpperCase();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

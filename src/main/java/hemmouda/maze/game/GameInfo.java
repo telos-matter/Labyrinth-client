@@ -4,7 +4,7 @@ import hemmouda.maze.util.Logger;
 
 /**
  * A record for the current information about the
- * game.
+ * game. And for the player.
  */
 public final class GameInfo {
 
@@ -12,7 +12,7 @@ public final class GameInfo {
 
     private static GameStatus status;
     /**
-     * How many turns have I played
+     * How many turns have been played
      */
     private static int turnsCount;
 
@@ -21,7 +21,7 @@ public final class GameInfo {
         status = GameStatus.PREPARING;
         turnsCount = 0;
 
-        Logger.info("GameInfo has been initialized");
+        Logger.debug("GameInfo has been initialized");
     }
 
     public static void setPlayerId (int id) {
@@ -45,6 +45,14 @@ public final class GameInfo {
 
     public static GameStatus getStatus () {
         return status;
+    }
+
+    /**
+     * Lemme know when it's a new turn
+     */
+    public static void newTurn () {
+        turnsCount++;
+        Logger.info("It's the player's turn. Turn #%d", turnsCount);
     }
 
     public static int getTurnsCount () {

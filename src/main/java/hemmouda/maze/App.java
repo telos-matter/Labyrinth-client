@@ -4,6 +4,7 @@ import de.fhac.mazenet.server.generated.ObjectFactory;
 import hemmouda.maze.communication.Communicator;
 import hemmouda.maze.communication.CommunicatorFactory;
 import hemmouda.maze.game.GameInfo;
+import hemmouda.maze.game.player.PlayerFactory;
 import hemmouda.maze.util.Logger;
 
 /**
@@ -31,6 +32,7 @@ public interface App {
         Logger.info("Starting the application");
 
         GameInfo.initialize();
+        PlayerFactory.getPlayer(); // To initialize it before beginning
 
         Communicator communicator = CommunicatorFactory.getCommunicator();
         communicator.beginGame();

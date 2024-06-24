@@ -1,8 +1,10 @@
 package hemmouda.maze.game.player.randomPlayer;
 
 import de.fhac.mazenet.server.game.Board;
+import de.fhac.mazenet.server.game.Card;
 import de.fhac.mazenet.server.game.Position;
 import de.fhac.mazenet.server.generated.AwaitMoveMessageData;
+import de.fhac.mazenet.server.generated.CardData;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import hemmouda.maze.App;
 import hemmouda.maze.game.GameInfo;
@@ -11,7 +13,6 @@ import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Const;
 import hemmouda.maze.util.Logger;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -55,34 +56,34 @@ public final class RandomPlayer extends Player {
         final long startTime = System.nanoTime();
 
         Board board = (Board) new Board(message.getBoard()).clone(); // As to not modify the original board
-        Position shift = getRandomShift(board);
-        applyShift(board, shift);
+        Position shiftPosition = getRandomShiftPosition(board);
+        CardData shiftCard = message.getBoard().getShiftCard(); // FIXME Could lead to error because it could still contain a pin
+        applyShift(board, shiftPosition, shiftCard);
         Position move = getRandomMove(board);
-        MoveMessageData response = constructMoveMessage(message.getBoard().getShiftCard(), shift, move);
+        MoveMessageData response = constructMoveMessage(message.getBoard().getShiftCard(), shiftPosition, move);
 
         final long finishTime = System.nanoTime();
         final long durationMilli = (finishTime - startTime) / 1_000_000L;
-        final float durationSec = durationMilli / 1_000F;
+        final float durationSec = durationMilli / 1_000F; // TODO i want just 0.000 and thats it not 0.00100
         Logger.debug("RandomPlayer finished \"thinking\". Took %f seconds", durationSec);
 
+        reportMove(new Card(shiftCard), shiftPosition, board.findPlayer(GameInfo.getPlayerId()), move);
         return response;
     }
 
     /**
      * @return a random valid shift position
      */
-    private Position getRandomShift (Board board) {
-        var ROWS = Const.POSSIBLE_SHIFT_ROWS;
-        var COLS = Const.POSSIBLE_SHIFT_COLS;
+    private Position getRandomShiftPosition(Board board) {
+        final var SHIFTS = Const.POSSIBLE_SHIFT_POSITIONS;
 
         Position shift = new Position();
 
         // Keep trying until you get a non forbidden shift
         do {
-            int row = ROWS.get(rand.nextInt(ROWS.size()));
-            int col = COLS.get(rand.nextInt(COLS.size()));
-            shift.setRow(row);
-            shift.setCol(col);
+            var possible = SHIFTS.get(rand.nextInt(SHIFTS.size()));
+            shift.setRow(possible.getRow());
+            shift.setCol(possible.getCol());
 
         } while (shift.equals(board.getForbidden())); // Automatically takes care of first turn case
 
@@ -92,13 +93,14 @@ public final class RandomPlayer extends Player {
     /**
      * Applies the shift to the board
      */
-    private void applyShift(Board board, Position shift) {
+    private void applyShift(Board board, Position shift, CardData shiftCard) {
         // Normally, setting just
         // the shiftPosition in MoveMessageData
         // should be fine as that it uses
         // nothing else.
         MoveMessageData moveMessage = App.OF.createMoveMessageData();
         moveMessage.setShiftPosition(shift);
+        moveMessage.setShiftCard(shiftCard);
         board.proceedShift(moveMessage);
     }
 

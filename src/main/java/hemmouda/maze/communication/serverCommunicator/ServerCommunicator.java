@@ -87,6 +87,19 @@ public final class ServerCommunicator implements Communicator {
                 }
             }
         }
+
+        disconnect();
+    }
+
+    private void disconnect() {
+        Logger.info("Closing the connection with the server");
+
+        try {
+            socket.close();
+            in.close();
+            out.close();
+            // Normally the in and out are also automatically closed. But oh well
+        } catch (Exception ignored) {}
     }
 
     private void send (MazeCom message) {
@@ -176,7 +189,8 @@ public final class ServerCommunicator implements Communicator {
     }
 
     private void processDisconnect (DisconnectMessageData disconnectMessage) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        Logger.info("Server issued a disconnect message");
+        GameInfo.gameEndedAbruptly();
     }
 
 }

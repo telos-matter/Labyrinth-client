@@ -3,9 +3,9 @@ package hemmouda.maze.game.player.randomPlayer;
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;
 import de.fhac.mazenet.server.game.Position;
-import de.fhac.mazenet.server.generated.AwaitMoveMessageData;
-import de.fhac.mazenet.server.generated.CardData;
 import de.fhac.mazenet.server.generated.MoveMessageData;
+import de.fhac.mazenet.server.generated.Treasure;
+import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.App;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.player.Player;
@@ -13,6 +13,7 @@ import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Const;
 import hemmouda.maze.util.Logger;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -48,43 +49,29 @@ public final class RandomPlayer extends Player {
 
     /**
      * Uses the already existing algorithms to find
-     * a valid insertion and a valid move.
+     * a random valid insertion and a random valid move.
      */
     @Override
-    public MoveMessageData getMove(AwaitMoveMessageData message) {
-        Logger.debug("RandomPlayer started \"thinking\"");
-        final long startTime = System.nanoTime();
-
-        Board board = (Board) new Board(message.getBoard()).clone(); // As to not modify the original board
+    public MoveMessageData think(Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures) {
         Position shiftPosition = getRandomShiftPosition(board);
-        CardData shiftCard = message.getBoard().getShiftCard(); // FIXME Could lead to error because it could still contain a pin
-        applyShift(board, shiftPosition, shiftCard);
+        Card shiftCard = new Card(board.getShiftCard()); // FIXME Could lead to error because it could still contain a pin. Maybe?
+        applyShift(board, shiftPosition, shiftCard); // This does not modify the shiftCard data, rather changes the reference
         Position move = getRandomMove(board);
-        MoveMessageData response = constructMoveMessage(message.getBoard().getShiftCard(), shiftPosition, move);
 
-        final long finishTime = System.nanoTime();
-        final long durationMilli = (finishTime - startTime) / 1_000_000L;
-        final float durationSec = durationMilli / 1_000F; // TODO i want just 0.000 and thats it not 0.00100
-        Logger.debug("RandomPlayer finished \"thinking\". Took %f seconds", durationSec);
-
-        reportMove(new Card(shiftCard), shiftPosition, board.findPlayer(GameInfo.getPlayerId()), move);
-        return response;
+        return constructMoveMessage(shiftCard, shiftPosition, move);
     }
 
     /**
-     * @return a random valid shift position
+     * @return a readonly random valid shift position
      */
     private Position getRandomShiftPosition(Board board) {
         final var SHIFTS = Const.POSSIBLE_SHIFT_POSITIONS;
 
-        Position shift = new Position();
+        Position shift;
 
         // Keep trying until you get a non forbidden shift
         do {
-            var possible = SHIFTS.get(rand.nextInt(SHIFTS.size()));
-            shift.setRow(possible.getRow());
-            shift.setCol(possible.getCol());
-
+            shift = SHIFTS.get(rand.nextInt(SHIFTS.size()));
         } while (shift.equals(board.getForbidden())); // Automatically takes care of first turn case
 
         return shift;
@@ -93,11 +80,7 @@ public final class RandomPlayer extends Player {
     /**
      * Applies the shift to the board
      */
-    private void applyShift(Board board, Position shift, CardData shiftCard) {
-        // Normally, setting just
-        // the shiftPosition in MoveMessageData
-        // should be fine as that it uses
-        // nothing else.
+    private void applyShift(Board board, Position shift, Card shiftCard) {
         MoveMessageData moveMessage = App.OF.createMoveMessageData();
         moveMessage.setShiftPosition(shift);
         moveMessage.setShiftCard(shiftCard);
@@ -113,4 +96,8 @@ public final class RandomPlayer extends Player {
         return positions.get(rand.nextInt(positions.size()));
     }
 
+    @Override
+    public String toString() {
+        return "RandomPlayer";
+    }
 }

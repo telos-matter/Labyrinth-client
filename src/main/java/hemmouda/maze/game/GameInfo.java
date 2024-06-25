@@ -16,10 +16,13 @@ public final class GameInfo {
      */
     private static int turnsCount;
 
+    private static int winnerId;
+
     public static void initialize () {
         playerId = -1;
         status = GameStatus.PREPARING;
         turnsCount = 0;
+        winnerId = -1;
 
         Logger.debug("GameInfo has been initialized");
     }
@@ -44,6 +47,25 @@ public final class GameInfo {
         Logger.info("Game started");
     }
 
+    /**
+     * Lemme when the game is over and who
+     * won
+     */
+    public static void gameWon (int winnerId) {
+        status = GameStatus.COMPLETED;
+        GameInfo.winnerId = winnerId;
+        if (winnerId == playerId) {
+            Logger.info("Game finished. You won!");
+        } else {
+            Logger.info("Game finished. Player #%d won", winnerId);
+        }
+    }
+
+    public static void gameEndedAbruptly () {
+        status = GameStatus.ABRUPTLY_ENDED;
+        Logger.info("Game ended abruptly");
+    }
+
     public static GameStatus getStatus () {
         return status;
     }
@@ -58,6 +80,14 @@ public final class GameInfo {
 
     public static int getTurnsCount () {
         return turnsCount;
+    }
+
+    public static int getWinnerId () {
+        if (status != GameStatus.COMPLETED) {
+            throw new IllegalStateException("Game is not yet over or there is no winner");
+        }
+
+        return winnerId;
     }
 
 }

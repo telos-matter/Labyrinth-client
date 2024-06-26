@@ -4,6 +4,7 @@ import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;
 import de.fhac.mazenet.server.game.Position;
 import de.fhac.mazenet.server.generated.AwaitMoveMessageData;
+import de.fhac.mazenet.server.generated.MoveInfoData;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import de.fhac.mazenet.server.generated.Treasure;
@@ -65,6 +66,12 @@ public abstract class Player {
      * however you like.
      */
     protected abstract MoveMessageData think (Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures);
+
+    /**
+     * Notify the player
+     * of OTHER players moves
+     */
+    public abstract void otherPlayerMove (MoveInfoData moveInfo);
 
     /**
      * Utility method for subclasses

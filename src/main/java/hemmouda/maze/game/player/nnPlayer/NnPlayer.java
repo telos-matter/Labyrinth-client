@@ -1,6 +1,7 @@
 package hemmouda.maze.game.player.nnPlayer;
 
 import de.fhac.mazenet.server.game.Board;
+import de.fhac.mazenet.server.generated.MoveInfoData;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.Treasure;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
@@ -34,4 +35,8 @@ public final class NnPlayer extends Player {
         throw new UnsupportedOperationException("Not yet implemented!");
     }
 
+    @Override
+    public void otherPlayerMove(MoveInfoData moveInfo) {
+        throw new UnsupportedOperationException("Not yet implemented!");
+    }
 }

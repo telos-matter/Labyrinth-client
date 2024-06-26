@@ -181,7 +181,9 @@ public final class ServerCommunicator implements Communicator {
     }
 
     private void processMoveInfo (MoveInfoData moveInfo) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        if (moveInfo.getPlayerId() != GameInfo.getPlayerId()) {
+            PlayerFactory.getPlayer().otherPlayerMove(moveInfo);
+        }
     }
 
     private void processWin (WinMessageData winMessage) {

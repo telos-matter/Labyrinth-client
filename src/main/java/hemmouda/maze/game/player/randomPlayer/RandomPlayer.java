@@ -9,6 +9,7 @@ import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.App;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.player.Player;
+import hemmouda.maze.game.player.util.BoardUtil;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Const;
 import hemmouda.maze.util.Logger;
@@ -54,8 +55,8 @@ public final class RandomPlayer extends Player {
     @Override
     public MoveMessageData think(Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures) {
         Position shiftPosition = getRandomShiftPosition(board);
-        Card shiftCard = new Card(board.getShiftCard()); // FIXME Could lead to error because it could still contain a pin. Maybe?
-        applyShift(board, shiftPosition, shiftCard); // This does not modify the shiftCard data, rather changes the reference
+        Card shiftCard = new Card(board.getShiftCard());
+        BoardUtil.applyShift(board, shiftPosition, shiftCard.getOrientation()); // This does not modify the shiftCard data, rather changes the reference
         Position move = getRandomMove(board);
 
         return constructMoveMessage(shiftCard, shiftPosition, move);
@@ -75,16 +76,6 @@ public final class RandomPlayer extends Player {
         } while (shift.equals(board.getForbidden())); // Automatically takes care of first turn case
 
         return shift;
-    }
-
-    /**
-     * Applies the shift to the board
-     */
-    private void applyShift(Board board, Position shift, Card shiftCard) {
-        MoveMessageData moveMessage = App.OF.createMoveMessageData();
-        moveMessage.setShiftPosition(shift);
-        moveMessage.setShiftCard(shiftCard);
-        board.proceedShift(moveMessage);
     }
 
     /**

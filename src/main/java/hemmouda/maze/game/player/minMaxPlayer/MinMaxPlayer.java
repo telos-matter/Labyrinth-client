@@ -1,6 +1,7 @@
 package hemmouda.maze.game.player.minMaxPlayer;
 
 import de.fhac.mazenet.server.game.Board;
+import de.fhac.mazenet.server.generated.MoveInfoData;
 import de.fhac.mazenet.server.generated.Treasure;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
@@ -31,6 +32,11 @@ public final class MinMaxPlayer extends Player {
 
     @Override
     protected MoveMessageData think(Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures) {
+        throw new UnsupportedOperationException("Not yet implemented!");
+    }
+
+    @Override
+    public void otherPlayerMove(MoveInfoData moveInfo) {
         throw new UnsupportedOperationException("Not yet implemented!");
     }
 

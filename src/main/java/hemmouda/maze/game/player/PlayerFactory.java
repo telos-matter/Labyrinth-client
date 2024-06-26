@@ -1,5 +1,6 @@
 package hemmouda.maze.game.player;
 
+import hemmouda.maze.game.player.inputPlayer.InputPlayer;
 import hemmouda.maze.game.player.minMaxPlayer.MinMaxPlayer;
 import hemmouda.maze.game.player.nnPlayer.NnPlayer;
 import hemmouda.maze.game.player.randomPlayer.RandomPlayer;
@@ -17,6 +18,7 @@ public final class PlayerFactory {
         if (usedPlayer == null) {
             usedPlayer = switch (Settings.PLAYER) {
                 case "RANDOM" -> RandomPlayer.getInstance();
+                case "INPUT" -> InputPlayer.getInstance();
                 case "MIN_MAX" -> MinMaxPlayer.getInstance();
                 case "NN_PLAYER" -> NnPlayer.getInstance();
                 default -> {

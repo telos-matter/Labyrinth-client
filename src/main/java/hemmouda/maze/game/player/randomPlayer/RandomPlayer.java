@@ -3,10 +3,10 @@ package hemmouda.maze.game.player.randomPlayer;
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;
 import de.fhac.mazenet.server.game.Position;
+import de.fhac.mazenet.server.generated.MoveInfoData;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.Treasure;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
-import hemmouda.maze.App;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.player.Player;
 import hemmouda.maze.game.player.util.BoardUtil;
@@ -61,6 +61,9 @@ public final class RandomPlayer extends Player {
 
         return constructMoveMessage(shiftCard, shiftPosition, move);
     }
+
+    @Override
+    public void otherPlayerMove(MoveInfoData moveInfo) {} // Hh, ok
 
     /**
      * @return a readonly random valid shift position

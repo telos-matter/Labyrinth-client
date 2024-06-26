@@ -3,6 +3,7 @@ package hemmouda.maze.game.player.inputPlayer;
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;
 import de.fhac.mazenet.server.game.Position;
+import de.fhac.mazenet.server.generated.MoveInfoData;
 import de.fhac.mazenet.server.generated.Treasure;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
@@ -93,6 +94,9 @@ public final class InputPlayer extends Player {
 
         return constructMoveMessage(BoardUtil.rotate(shiftCard, orientation), shiftPosition, newPinPosition);
     }
+
+    @Override
+    public void otherPlayerMove(MoveInfoData moveInfo) {} // Hh, ok 2
 
     private void write (String message) {
         out.println(message);

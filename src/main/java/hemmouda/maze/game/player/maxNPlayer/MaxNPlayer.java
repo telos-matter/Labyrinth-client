@@ -1,4 +1,4 @@
-package hemmouda.maze.game.player.minMaxPlayer;
+package hemmouda.maze.game.player.maxNPlayer;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.generated.MoveInfoData;
@@ -10,20 +10,20 @@ import hemmouda.maze.game.player.Player;
 import java.util.List;
 
 /**
- * A player that gets the best move with a MinMax algorithm
+ * A player that gets the best move with a MaxN algorithm
  */
-public final class MinMaxPlayer extends Player {
+public final class MaxNPlayer extends Player {
 
-    private static MinMaxPlayer instance;
+    private static MaxNPlayer instance;
 
-    public static MinMaxPlayer getInstance() {
+    public static MaxNPlayer getInstance() {
         if (instance == null) {
-            instance = new MinMaxPlayer();
+            instance = new MaxNPlayer();
         }
         return instance;
     }
 
-    private MinMaxPlayer () {}
+    private MaxNPlayer() {}
 
     @Override
     public void initialize() {

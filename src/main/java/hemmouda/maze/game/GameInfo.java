@@ -33,10 +33,6 @@ public final class GameInfo {
         Logger.debug("GameInfo has been initialized");
     }
 
-    public static boolean isPlayerIdSet () {
-        return playerId != null;
-    }
-
     public static void setPlayerId (int id) {
         if (playerId != null) {
             Logger.error("PlayerId has already been set to %d. Can't change it.", playerId); // Who could set it again? IDK

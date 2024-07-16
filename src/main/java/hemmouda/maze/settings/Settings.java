@@ -23,6 +23,8 @@ public final class Settings {
 
     public static final String PLAYER;
 
+    public static final int MAX_N_LOOK_AHEAD;
+
     // Initializes the values from the config file.
     // If an error occurred it uses the default values.
     static {
@@ -52,6 +54,7 @@ public final class Settings {
             SERVER_ADDRESS = InetAddress.getByName(prop.getProperty("SERVER_ADDRESS", "127.0.0.1"));
             SERVER_PORT = Integer.parseInt(prop.getProperty("SERVER_PORT", "5123"));
             PLAYER = prop.getProperty("PLAYER", "RANDOM").toUpperCase();
+            MAX_N_LOOK_AHEAD = Integer.parseInt(prop.getProperty("MAX_N_LOOK_AHEAD", "1"));
 
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -32,6 +32,14 @@
             <version>v2019.4</version>
         </dependency>
 
+        <!-- Generic MaxN implementation -->
+        <!-- https://github.com/telos-matter/Max-nJ -->
+        <dependency>
+            <groupId>telos-matter</groupId>
+            <artifactId>max-nj</artifactId>
+            <version>0.1</version>
+        </dependency>
+
         <!-- JAXB -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>

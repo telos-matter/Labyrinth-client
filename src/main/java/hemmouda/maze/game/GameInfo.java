@@ -21,14 +21,14 @@ public final class GameInfo {
      */
     private static int playersCount;
 
-    private static int winnerId;
+    private static Integer winnerId;
 
     public static void initialize () {
         playerId = -1;
         status = GameStatus.PREPARING;
         turnsCount = 0;
         playersCount = -1;
-        winnerId = -1;
+        winnerId = null;
 
         Logger.debug("GameInfo has been initialized");
     }

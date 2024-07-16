@@ -8,7 +8,7 @@ import hemmouda.maze.util.Logger;
  */
 public final class GameInfo {
 
-    private static int playerId;
+    private static Integer playerId;
 
     private static GameStatus status;
     /**
@@ -24,7 +24,7 @@ public final class GameInfo {
     private static Integer winnerId;
 
     public static void initialize () {
-        playerId = -1;
+        playerId = null;
         status = GameStatus.PREPARING;
         turnsCount = 0;
         playersCount = -1;
@@ -34,7 +34,7 @@ public final class GameInfo {
     }
 
     public static void setPlayerId (int id) {
-        if (playerId != -1) {
+        if (playerId != null) {
             Logger.error("PlayerId has already been set to %d. Can't change it.", playerId); // Who could set it again? IDK
             throw new IllegalStateException("PlayerId has already been set.");
         }

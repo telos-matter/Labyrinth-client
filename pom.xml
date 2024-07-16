@@ -25,6 +25,7 @@
 
     <dependencies>
         <!-- Maze server -->
+        <!-- https://git.fh-aachen.de/mazenet/maze-server -->
         <dependency>
             <groupId>de.fhac.mazenet</groupId>
             <artifactId>maze-server</artifactId>

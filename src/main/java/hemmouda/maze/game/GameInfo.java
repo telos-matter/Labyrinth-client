@@ -19,7 +19,7 @@ public final class GameInfo {
     /**
      * How many players are there.
      */
-    private static int playersCount;
+    private static Integer playersCount;
 
     private static Integer winnerId;
 
@@ -27,7 +27,7 @@ public final class GameInfo {
         playerId = null;
         status = GameStatus.PREPARING;
         turnsCount = 0;
-        playersCount = -1;
+        playersCount = null;
         winnerId = null;
 
         Logger.debug("GameInfo has been initialized");
@@ -49,11 +49,11 @@ public final class GameInfo {
      * @return has the playersCount been set or not
      */
     public static boolean isPlayersCountSet () {
-        return playersCount != -1;
+        return playersCount != null;
     }
 
     public static void setPlayersCount (int count) {
-        if (playersCount != -1) {
+        if (playersCount != null) {
             Logger.error("PlayersCount has already been set to %d. Can't change it.", playersCount);
             throw new IllegalStateException("PlayersCount has already been set.");
         }

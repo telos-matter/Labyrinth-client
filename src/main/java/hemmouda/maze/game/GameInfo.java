@@ -2,6 +2,8 @@ package hemmouda.maze.game;
 
 import hemmouda.maze.util.Logger;
 
+import java.util.Collection;
+
 /**
  * A record for the current information about the
  * game. And for the player.
@@ -9,6 +11,8 @@ import hemmouda.maze.util.Logger;
 public final class GameInfo {
 
     private static Integer playerId;
+
+    private static Collection<Integer> playersIds;
 
     private static GameStatus status;
     /**
@@ -20,6 +24,7 @@ public final class GameInfo {
 
     public static void initialize () {
         playerId = null;
+        playersIds = null;
         status = GameStatus.PREPARING;
         turnsCount = 0;
         winnerId = null;
@@ -37,6 +42,18 @@ public final class GameInfo {
 
     public static int getPlayerId () {
         return playerId;
+    }
+
+    public static void setPlayersIds (Collection <Integer> ids) {
+        if (playersIds != null) {
+            Logger.error("PlayersIds has already been set. Can't change it."); // Who could set it again? IDK
+            throw new IllegalStateException("PlayersIds has already been set.");
+        }
+        playersIds = ids;
+    }
+
+    public static Collection<Integer> getPlayersIds () {
+        return playersIds;
     }
 
     /**

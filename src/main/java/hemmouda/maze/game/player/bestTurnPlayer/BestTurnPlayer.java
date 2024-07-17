@@ -1,4 +1,4 @@
-package hemmouda.maze.game.player.maxNPlayer;
+package hemmouda.maze.game.player.bestTurnPlayer;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.generated.MoveInfoData;
@@ -7,8 +7,8 @@ import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.player.Player;
-import hemmouda.maze.game.player.maxNPlayer.maxNImpl.BoardEvaluation;
-import hemmouda.maze.game.player.maxNPlayer.maxNImpl.BoardState;
+import hemmouda.maze.game.player.bestTurnPlayer.maxNImpl.BoardEvaluation;
+import hemmouda.maze.game.player.bestTurnPlayer.maxNImpl.BoardState;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
 import telosmatter.maxnj.MaxN;
@@ -18,13 +18,13 @@ import java.util.List;
 /**
  * A player that gets the best move with a MaxN algorithm
  */
-public final class MaxNPlayer extends Player {
+public final class BestTurnPlayer extends Player {
 
-    private static MaxNPlayer instance;
+    private static BestTurnPlayer instance;
 
-    public static MaxNPlayer getInstance() {
+    public static BestTurnPlayer getInstance() {
         if (instance == null) {
-            instance = new MaxNPlayer();
+            instance = new BestTurnPlayer();
         }
         return instance;
     }
@@ -37,7 +37,7 @@ public final class MaxNPlayer extends Player {
      */
     private boolean initialized;
 
-    private MaxNPlayer() {
+    private BestTurnPlayer() {
         initialized = false;
     }
 

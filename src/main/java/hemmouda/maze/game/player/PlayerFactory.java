@@ -1,7 +1,7 @@
 package hemmouda.maze.game.player;
 
 import hemmouda.maze.game.player.inputPlayer.InputPlayer;
-import hemmouda.maze.game.player.maxNPlayer.MaxNPlayer;
+import hemmouda.maze.game.player.bestTurnPlayer.BestTurnPlayer;
 import hemmouda.maze.game.player.nnPlayer.NnPlayer;
 import hemmouda.maze.game.player.randomPlayer.RandomPlayer;
 import hemmouda.maze.settings.Settings;
@@ -19,7 +19,7 @@ public final class PlayerFactory {
             usedPlayer = switch (Settings.PLAYER) {
                 case "RANDOM" -> RandomPlayer.getInstance();
                 case "INPUT" -> InputPlayer.getInstance();
-                case "MAX_N" -> MaxNPlayer.getInstance();
+                case "BEST_TURN" -> BestTurnPlayer.getInstance();
                 case "NN_PLAYER" -> NnPlayer.getInstance();
                 default -> {
                     Logger.error("Unknown player type `%s`", Settings.PLAYER);

@@ -73,6 +73,7 @@ public abstract class Player {
      */
     public abstract void otherPlayerMove (MoveInfoData moveInfo);
 
+    // TODO board util now has this method, use it
     /**
      * Utility method for subclasses
      * to constructs a MoveMessage

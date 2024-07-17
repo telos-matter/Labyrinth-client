@@ -61,9 +61,9 @@ public final class ServerCommunicator implements Communicator {
     @Override
     public void beginGame() {
         login();
-        // Once you log in, the game could be considered as
-        // started even if the other players are yet
-        // to connect
+
+        waitForGameToStart();
+
         GameInfo.gameStarted();
 
         while (GameInfo.getStatus().equals(GameStatus.IN_PROGRESS)) {
@@ -153,13 +153,27 @@ public final class ServerCommunicator implements Communicator {
         Logger.info("Logged into the game successfully");
     }
 
-    private void answerAwaitMove (AwaitMoveMessageData awaitMoveMessage) {
-        // Check if playersCount has not yet been set
-        if (!GameInfo.isPlayersCountSet()) {
-            int playersCount = awaitMoveMessage.getTreasuresToGo().size();
-            GameInfo.setPlayersCount(playersCount);
+    /**
+     * Waits for the game to starts.
+     * I added this functionality to
+     * the server. It did not exist before.
+     * Just before the game start a
+     * message containing the players
+     * ids will be sent, this waits for
+     * that message.
+     */
+    private void waitForGameToStart () {
+        MazeCom mazeCom = receive();
+        if (!mazeCom.getMessagetype().equals(MazeComMessagetype.IDS_INFO)) {
+            Logger.error("Was expecting %s, and not %s", MazeComMessagetype.IDS_INFO, mazeCom.getMessagetype());
+            throw new UnexpectedResponse(mazeCom, MazeComMessagetype.IDS_INFO);
         }
 
+        var playersIdsMessage = mazeCom.getPlayersIdsMessage();
+        GameInfo.setPlayersIds(playersIdsMessage.getIds());
+    }
+
+    private void answerAwaitMove (AwaitMoveMessageData awaitMoveMessage) {
         // Update game
         GameInfo.newTurn();
 

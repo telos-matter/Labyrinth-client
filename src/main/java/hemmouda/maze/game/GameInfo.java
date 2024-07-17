@@ -60,6 +60,11 @@ public final class GameInfo {
      * Lemme know when the game starts
      */
     public static void gameStarted () {
+        if (playerId == null | playersIds == null) {
+            Logger.error("Game cannot start until the PlayerId and the PlayersIds has been set.");
+            throw new IllegalStateException("Tried to start game while PlayerId and PlayersIds are not yet set!");
+        }
+
         status = GameStatus.IN_PROGRESS;
         Logger.info("Game started. Number of players: %d", playersIds.size());
     }

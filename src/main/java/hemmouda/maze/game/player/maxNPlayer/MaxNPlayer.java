@@ -5,7 +5,13 @@ import de.fhac.mazenet.server.generated.MoveInfoData;
 import de.fhac.mazenet.server.generated.Treasure;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
+import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.player.Player;
+import hemmouda.maze.game.player.maxNPlayer.maxNImpl.BoardEvaluation;
+import hemmouda.maze.game.player.maxNPlayer.maxNImpl.BoardState;
+import hemmouda.maze.settings.Settings;
+import hemmouda.maze.util.Logger;
+import telosmatter.maxnj.MaxN;
 
 import java.util.List;
 
@@ -23,16 +29,40 @@ public final class MaxNPlayer extends Player {
         return instance;
     }
 
-    private MaxNPlayer() {}
+    private MaxN <Integer, MoveMessageData, BoardState> algorithm;
+
+    /**
+     * Has it been initialized and ready
+     * to be used
+     */
+    private boolean initialized;
+
+    private MaxNPlayer() {
+        initialized = false;
+    }
 
     @Override
     public void initialize() {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        // The only thing needed to initialize is to know how many players are there
+        if (!initialized && GameInfo.getPlayersIds() != null) {
+            int playersCount = GameInfo.getPlayersIds().size();
+            int depth = (Settings.MAX_N_LOOK_AHEAD * playersCount) + 1;
+            algorithm = new MaxN<>(BoardEvaluation.evaluationFunction, depth);
+
+            initialized = true;
+        }
     }
 
     @Override
     protected MoveMessageData think(Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        initialize();
+        if (!initialized) {
+            Logger.error("MaxN has been asked to play, yet it still isn't able to be initialized!");
+            throw new IllegalStateException("MaxN is not yet initialized!");
+        }
+
+        var boardState = new BoardState(board, currentTreasure, remainingTreasures);
+        return algorithm.getBestMove(boardState);
     }
 
     @Override
@@ -40,4 +70,12 @@ public final class MaxNPlayer extends Player {
         throw new UnsupportedOperationException("Not yet implemented!");
     }
 
+    @Override
+    public String toString() {
+        if (algorithm != null) {
+            return "MaxNPlayer:%d".formatted(algorithm.getDepth());
+        } else {
+            return "MaxNPlayer";
+        }
+    }
 }

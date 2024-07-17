@@ -24,6 +24,8 @@ import java.util.Random;
  */
 public final class RandomPlayer extends Player {
 
+    // TODO some stuff here have been implemented in BoardUtil. Use those
+
     private static RandomPlayer instance;
 
     public static RandomPlayer getInstance() {

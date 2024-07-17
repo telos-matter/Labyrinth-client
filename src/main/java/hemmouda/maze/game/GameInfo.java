@@ -61,7 +61,7 @@ public final class GameInfo {
      */
     public static void gameStarted () {
         status = GameStatus.IN_PROGRESS;
-        Logger.info("Game started");
+        Logger.info("Game started with #%d player(s)", playersIds.size());
     }
 
     /**

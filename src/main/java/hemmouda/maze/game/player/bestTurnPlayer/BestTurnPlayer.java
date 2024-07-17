@@ -26,9 +26,7 @@ public final class BestTurnPlayer extends Player {
     private BestTurnPlayer() {}
 
     @Override
-    public void initialize() {
-
-    }
+    public void initialize() {}
 
     @Override
     protected MoveMessageData think(Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures) {
@@ -36,9 +34,7 @@ public final class BestTurnPlayer extends Player {
     }
 
     @Override
-    public void otherPlayerMove(MoveInfoData moveInfo) {
-        throw new UnsupportedOperationException("Not yet implemented!");
-    }
+    public void otherPlayerMove(MoveInfoData moveInfo) {} // Hh, ok 3
 
     @Override
     public String toString() {

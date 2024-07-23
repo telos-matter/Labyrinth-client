@@ -9,8 +9,6 @@ import de.fhac.mazenet.server.generated.Treasure;
 import hemmouda.maze.App;
 import hemmouda.maze.util.Const;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,8 +16,6 @@ import java.util.stream.Collectors;
  * A utility class for the board
  */
 public class BoardUtil {
-
-    // TODO restructure. Maybe another class for some other stuff
 
     /**
      * Inserts the given shiftCard
@@ -42,7 +38,7 @@ public class BoardUtil {
      */
     public static void applyShift (Board board, Position shiftPosition, Card.Orientation orientation) {
         var shiftCard = new Card(board.getShiftCard());
-        shiftCard = rotate(shiftCard, orientation);
+        shiftCard = CardUtil.rotate(shiftCard, orientation);
 
         applyShift(board, shiftPosition, shiftCard);
     }
@@ -58,16 +54,6 @@ public class BoardUtil {
         return clone;
     }
 
-
-    /**
-     * @return all possible rotations of this card
-     */
-    public static Collection<Card> getAllRotations (Card card) {
-        return Arrays.stream(Card.Orientation.values()).
-                map(orientation -> rotate(card, orientation)).
-                collect(Collectors.toList());
-    }
-
     /**
      * @return all possible shift position on this board
      */
@@ -75,18 +61,6 @@ public class BoardUtil {
         return Const.POSSIBLE_SHIFT_POSITIONS.stream().
                 filter(shift -> !shift.equals(board.getForbidden())).
                 collect(Collectors.toList());
-    }
-
-    /**
-     * @return all reachable positions
-     * of the specified player after the insertion
-     * @implNote does not modify the board
-     */
-    public static Collection<Position> getAllReachablePositions (Board board, Card card, Position shiftPosition, int playerId) {
-        Board clone = (Board) board.clone();
-        applyShift(clone, shiftPosition, card);
-        Position playerPosition = clone.findPlayer(playerId);
-        return clone.getAllReachablePositions(playerPosition);
     }
 
     /**

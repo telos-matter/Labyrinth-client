@@ -105,15 +105,4 @@ public class BoardUtil {
         }
     }
 
-    /**
-     * Constructs a moveMessage from the given data
-     */
-    public static MoveMessageData constructMoveMessage (Card shiftCard, Position shiftPosition, Position newPinPosition) {
-        MoveMessageData moveMessage = App.OF.createMoveMessageData();
-        moveMessage.setShiftCard(shiftCard);
-        moveMessage.setShiftPosition(shiftPosition);
-        moveMessage.setNewPinPos(newPinPosition);
-
-        return moveMessage;
-    }
 }

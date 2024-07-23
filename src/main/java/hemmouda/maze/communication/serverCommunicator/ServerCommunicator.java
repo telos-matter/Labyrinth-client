@@ -187,7 +187,7 @@ public final class ServerCommunicator implements Communicator {
     }
 
     private void processWin (WinMessageData winMessage) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        GameInfo.gameWon(winMessage.getWinner().getId());
     }
 
     private void processDisconnect (DisconnectMessageData disconnectMessage) {

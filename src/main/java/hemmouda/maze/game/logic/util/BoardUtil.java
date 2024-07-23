@@ -14,6 +14,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * A utility class for the board
+ */
 public class BoardUtil {
 
     // TODO restructure. Maybe another class for some other stuff
@@ -55,12 +58,6 @@ public class BoardUtil {
         return clone;
     }
 
-    /**
-     * @return the given card rotated to the given orientation
-     */
-    public static Card rotate (Card card, Card.Orientation orientation) {
-        return new Card(card.getShape(), orientation, card.getTreasure());
-    }
 
     /**
      * @return all possible rotations of this card

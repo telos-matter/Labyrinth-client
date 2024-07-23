@@ -3,7 +3,7 @@ package hemmouda.maze.game.logic.player.bestTurnPlayer.core;
 import de.fhac.mazenet.server.game.Card;
 import de.fhac.mazenet.server.game.Position;
 import de.fhac.mazenet.server.generated.MoveMessageData;
-import hemmouda.maze.game.logic.util.BoardUtil;
+import hemmouda.maze.game.logic.util.MoveMessageUtil;
 import hemmouda.maze.util.Logger;
 
 /**
@@ -63,7 +63,7 @@ public class MoveEvaluator {
             double value
     ) {
         public MoveMessageData constructMoveMessageData () {
-            return BoardUtil.constructMoveMessage(card, shiftPosition, newPinPosition);
+            return MoveMessageUtil.construct(card, shiftPosition, newPinPosition);
         }
     }
 

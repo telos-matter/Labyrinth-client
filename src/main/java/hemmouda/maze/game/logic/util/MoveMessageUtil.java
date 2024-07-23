@@ -15,7 +15,7 @@ public class MoveMessageUtil {
     /**
      * Constructs a moveMessage from the given data
      */
-    public static MoveMessageData constructMoveMessage (Card shiftCard, Position shiftPosition, Position newPinPosition) {
+    public static MoveMessageData construct (Card shiftCard, Position shiftPosition, Position newPinPosition) {
         MoveMessageData moveMessage = App.OF.createMoveMessageData();
         moveMessage.setShiftCard(shiftCard);
         moveMessage.setShiftPosition(shiftPosition);

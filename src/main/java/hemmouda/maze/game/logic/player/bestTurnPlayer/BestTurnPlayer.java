@@ -11,7 +11,7 @@ import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.logic.player.Player;
 import hemmouda.maze.game.logic.player.bestTurnPlayer.core.MoveEvaluator;
 import hemmouda.maze.game.logic.player.util.BoardUtil;
-import hemmouda.maze.game.logic.player.util.Randomness;
+import hemmouda.maze.game.logic.tools.Randomness;
 import hemmouda.maze.util.Const;
 
 import java.util.List;

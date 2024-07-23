@@ -10,6 +10,8 @@ import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.logic.player.Player;
 import hemmouda.maze.game.logic.util.BoardUtil;
+import hemmouda.maze.game.logic.util.CardUtil;
+import hemmouda.maze.game.logic.util.MoveMessageUtil;
 import hemmouda.maze.util.Const;
 import hemmouda.maze.util.Logger;
 
@@ -92,7 +94,9 @@ public final class InputPlayer extends Player {
         // Ask for the new position
         var newPinPosition = promptForMove(board, pinPosition);
 
-        return constructMoveMessage(BoardUtil.rotate(shiftCard, orientation), shiftPosition, newPinPosition);
+        // Construct and return the moveMessage
+        shiftCard = CardUtil.rotate(shiftCard, orientation);
+        return MoveMessageUtil.construct(shiftCard, shiftPosition, newPinPosition);
     }
 
     @Override

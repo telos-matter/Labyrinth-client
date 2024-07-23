@@ -24,35 +24,15 @@ public class MoveEvaluator {
             Card card,
             Position shiftPosition,
             Position newPinPosition,
-            Position treasurePosition) {
+            Position goalPosition) {
 
-        // All what is needed is the value
-        double value;
+        // All what is needed is the value,
+        // which the reverse of the distance
+        // to the goalPosition
+        double x = newPinPosition.getCol() - goalPosition.getCol();
+        double y = newPinPosition.getRow() - goalPosition.getRow();
 
-        // Normally, this wouldn't be called
-        // if the treasure was reached, but nevertheless
-        // let's check
-        if (newPinPosition.equals(treasurePosition)) {
-            value = Double.POSITIVE_INFINITY;
-
-        // With that out of the way, the
-        // best move is getting close
-        // to a random shift position, so
-        // that in the next turn
-        // we can move freely
-        } else {
-
-            // TODO make it go to a set random shift position, and not a different one for every single move
-            // Go to a shift position other than the one you can reach
-            Position randomShiftPosition;
-            do {
-                randomShiftPosition = Randomness.getRandomElement(Const.POSSIBLE_SHIFT_POSITIONS);
-            } while (newPinPosition.equals(randomShiftPosition));
-            double x = newPinPosition.getCol() - randomShiftPosition.getCol();
-            double y = newPinPosition.getRow() - randomShiftPosition.getRow();
-
-            value = -Math.hypot(x, y); // The further, the worse
-        }
+        double value = -Math.hypot(x, y); // The further, the worse
 
         return new MoveRecord(card, shiftPosition, newPinPosition, value);
     }

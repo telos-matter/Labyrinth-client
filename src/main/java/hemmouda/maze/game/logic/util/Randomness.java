@@ -1,4 +1,4 @@
-package hemmouda.maze.game.logic.tools;
+package hemmouda.maze.game.logic.util;
 
 import hemmouda.maze.settings.Settings;
 

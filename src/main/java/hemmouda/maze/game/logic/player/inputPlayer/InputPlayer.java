@@ -9,7 +9,7 @@ import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.logic.player.Player;
-import hemmouda.maze.game.logic.tools.BoardUtil;
+import hemmouda.maze.game.logic.util.BoardUtil;
 import hemmouda.maze.util.Const;
 import hemmouda.maze.util.Logger;
 

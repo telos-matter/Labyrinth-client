@@ -10,12 +10,12 @@ import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.logic.player.Player;
 import hemmouda.maze.game.logic.util.BoardUtil;
-import hemmouda.maze.settings.Settings;
+import hemmouda.maze.game.logic.util.MoveMessageUtil;
+import hemmouda.maze.game.logic.util.Randomness;
 import hemmouda.maze.util.Const;
 import hemmouda.maze.util.Logger;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * A random player. Plays random
@@ -23,8 +23,6 @@ import java.util.Random;
  * Just for testing.
  */
 public final class RandomPlayer extends Player {
-
-    // TODO some stuff here have been implemented in BoardUtil. Use those
 
     private static RandomPlayer instance;
 
@@ -35,18 +33,10 @@ public final class RandomPlayer extends Player {
         return instance;
     }
 
-    private Random rand;
-
     private RandomPlayer () {}
 
     @Override
     public void initialize() {
-        if (Settings.SEED == null) {
-            rand = new Random();
-        } else {
-            rand = new Random(Settings.SEED);
-        }
-
         Logger.info("RandomPlayer has been initialized");
     }
 
@@ -58,10 +48,11 @@ public final class RandomPlayer extends Player {
     public MoveMessageData think(Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures) {
         Position shiftPosition = getRandomShiftPosition(board);
         Card shiftCard = new Card(board.getShiftCard());
-        BoardUtil.applyShift(board, shiftPosition, shiftCard.getOrientation()); // This does not modify the shiftCard data, rather changes the reference
+        Card.Orientation orientation = getRandomOrientation(shiftCard);
+        BoardUtil.applyShift(board, shiftPosition, orientation);
         Position move = getRandomMove(board);
 
-        return constructMoveMessage(shiftCard, shiftPosition, move);
+        return MoveMessageUtil.construct(shiftCard, shiftPosition, move);
     }
 
     @Override
@@ -71,25 +62,31 @@ public final class RandomPlayer extends Player {
      * @return a readonly random valid shift position
      */
     private Position getRandomShiftPosition(Board board) {
-        final var SHIFTS = Const.POSSIBLE_SHIFT_POSITIONS;
-
         Position shift;
 
         // Keep trying until you get a non forbidden shift
         do {
-            shift = SHIFTS.get(rand.nextInt(SHIFTS.size()));
+            shift = Randomness.getRandomElement(Const.POSSIBLE_SHIFT_POSITIONS);
         } while (shift.equals(board.getForbidden())); // Automatically takes care of first turn case
 
         return shift;
     }
 
     /**
-     * @return a random valid move position
+     * @return a random orientation for the given card
+     */
+    private Card.Orientation getRandomOrientation (Card card) {
+        var possibleRotations = card.getPossibleRotations();
+        return Randomness.getRandomElement(possibleRotations).getOrientation();
+    }
+
+    /**
+     * @return a random valid move newPinPosition
      */
     private Position getRandomMove (Board board) {
         Position playerPosition = board.findPlayer(GameInfo.getPlayerId());
         var positions = board.getAllReachablePositions(playerPosition);
-        return positions.get(rand.nextInt(positions.size()));
+        return Randomness.getRandomElement(positions);
     }
 
     @Override

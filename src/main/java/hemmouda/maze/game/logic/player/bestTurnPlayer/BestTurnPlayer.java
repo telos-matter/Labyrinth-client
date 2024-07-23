@@ -11,8 +11,10 @@ import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.logic.player.Player;
 import hemmouda.maze.game.logic.player.bestTurnPlayer.core.MoveEvaluator;
 import hemmouda.maze.game.logic.util.BoardUtil;
+import hemmouda.maze.game.logic.util.MoveMessageUtil;
 import hemmouda.maze.game.logic.util.Randomness;
 import hemmouda.maze.util.Const;
+import hemmouda.maze.util.Logger;
 
 import java.util.List;
 
@@ -33,7 +35,9 @@ public final class BestTurnPlayer extends Player {
     private BestTurnPlayer() {}
 
     @Override
-    public void initialize() {}
+    public void initialize() {
+        Logger.info("BestTurnPlayer has been initialized");
+    }
 
     /**
      * <p>Obviously, if the treasure is
@@ -97,7 +101,7 @@ public final class BestTurnPlayer extends Player {
                     // Check if we can reach the treasure
                     if (position.equals(treasurePosition)) {
                         // If so, that is the move
-                        return constructMoveMessage(card, shiftPosition, position);
+                        return MoveMessageUtil.construct(card, shiftPosition, position);
                     }
 
                     // Otherwise, let MoveEvaluator pick the best move

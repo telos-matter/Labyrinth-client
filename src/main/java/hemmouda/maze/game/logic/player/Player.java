@@ -76,7 +76,7 @@ public abstract class Player {
      * Logs a debug messages to report
      * the move
      */
-    protected static void reportMove (AwaitMoveMessageData message, MoveMessageData response) {
+    private static void reportMove (AwaitMoveMessageData message, MoveMessageData response) {
         if (!Settings.DEBUG) {
             return; // No need to waste memory or time
         }

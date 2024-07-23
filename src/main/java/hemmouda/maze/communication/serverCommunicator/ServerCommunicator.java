@@ -154,12 +154,6 @@ public final class ServerCommunicator implements Communicator {
     }
 
     private void answerAwaitMove (AwaitMoveMessageData awaitMoveMessage) {
-        // Check if playersCount has not yet been set
-        if (!GameInfo.isPlayersCountSet()) {
-            int playersCount = awaitMoveMessage.getTreasuresToGo().size();
-            GameInfo.setPlayersCount(playersCount);
-        }
-
         // Update game
         GameInfo.newTurn();
 

@@ -48,8 +48,12 @@ public final class RandomPlayer extends Player {
     public MoveMessageData think(Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures) {
         Position shiftPosition = getRandomShiftPosition(board);
         Card shiftCard = new Card(board.getShiftCard());
-        Card.Orientation orientation = getRandomOrientation(shiftCard);
-        BoardUtil.applyShift(board, shiftPosition, orientation);
+        // There is some bug in the server, because this does not work
+//        Card.Orientation orientation = getRandomOrientation(shiftCard);
+//        BoardUtil.applyShift(board, shiftPosition, orientation);
+        // Even with their method, so like it's not something from me
+//        BoardUtil.applyShift(board, shiftPosition, Randomness.getRandomElement(shiftCard.getPossibleRotations()));
+        BoardUtil.applyShift(board, shiftPosition, shiftCard);
         Position move = getRandomMove(board);
 
         return MoveMessageUtil.construct(shiftCard, shiftPosition, move);

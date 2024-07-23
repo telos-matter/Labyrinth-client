@@ -14,12 +14,11 @@ public class Randomness {
 
     /**
      * Returns a random element
-     * from the list, or <code>null</code>
-     * if the list is empty
+     * from a non-empty list.
      */
     public static <T> T getRandomElement (List<T> list) {
         if (list.isEmpty()) {
-            return null;
+            throw new IllegalArgumentException("List cannot be empty");
         }
 
         return list.get(RAND.nextInt(list.size()));

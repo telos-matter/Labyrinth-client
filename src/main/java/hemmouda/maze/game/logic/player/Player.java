@@ -8,7 +8,6 @@ import de.fhac.mazenet.server.generated.MoveInfoData;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import de.fhac.mazenet.server.generated.Treasure;
-import hemmouda.maze.App;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
@@ -72,24 +71,6 @@ public abstract class Player {
      * of OTHER players moves
      */
     public abstract void otherPlayerMove (MoveInfoData moveInfo);
-
-    // TODO board util now has this method, use it
-    /**
-     * Utility method for subclasses
-     * to constructs a MoveMessage
-     * from the given data.
-     * Intended to be used
-     * by Player implementations to
-     * generate a response move.
-     */
-    protected static MoveMessageData constructMoveMessage (Card shiftCard, Position shiftPosition, Position newPinPosition) {
-        MoveMessageData moveMessage = App.OF.createMoveMessageData();
-        moveMessage.setShiftCard(shiftCard);
-        moveMessage.setShiftPosition(shiftPosition);
-        moveMessage.setNewPinPos(newPinPosition);
-
-        return moveMessage;
-    }
 
     /**
      * Logs a debug messages to report

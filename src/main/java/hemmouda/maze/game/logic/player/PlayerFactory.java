@@ -1,9 +1,9 @@
-package hemmouda.maze.game.player;
+package hemmouda.maze.game.logic.player;
 
-import hemmouda.maze.game.player.inputPlayer.InputPlayer;
-import hemmouda.maze.game.player.bestTurnPlayer.BestTurnPlayer;
-import hemmouda.maze.game.player.nnPlayer.NnPlayer;
-import hemmouda.maze.game.player.randomPlayer.RandomPlayer;
+import hemmouda.maze.game.logic.player.inputPlayer.InputPlayer;
+import hemmouda.maze.game.logic.player.bestTurnPlayer.BestTurnPlayer;
+import hemmouda.maze.game.logic.player.nnPlayer.NnPlayer;
+import hemmouda.maze.game.logic.player.randomPlayer.RandomPlayer;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
 

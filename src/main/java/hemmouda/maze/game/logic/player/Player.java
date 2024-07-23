@@ -1,4 +1,4 @@
-package hemmouda.maze.game.player;
+package hemmouda.maze.game.logic.player;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;

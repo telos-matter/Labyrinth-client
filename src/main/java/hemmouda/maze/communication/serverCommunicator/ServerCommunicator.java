@@ -7,7 +7,7 @@ import hemmouda.maze.App;
 import hemmouda.maze.communication.Communicator;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.GameStatus;
-import hemmouda.maze.game.player.PlayerFactory;
+import hemmouda.maze.game.logic.player.PlayerFactory;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Logger;
 import hemmouda.maze.util.exceptions.UnexpectedResponse;

@@ -1,11 +1,11 @@
-package hemmouda.maze.game.player.nnPlayer;
+package hemmouda.maze.game.logic.player.nnPlayer;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.generated.MoveInfoData;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.Treasure;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
-import hemmouda.maze.game.player.Player;
+import hemmouda.maze.game.logic.player.Player;
 
 import java.util.List;
 

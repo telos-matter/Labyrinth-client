@@ -4,7 +4,7 @@ import de.fhac.mazenet.server.generated.ObjectFactory;
 import hemmouda.maze.communication.Communicator;
 import hemmouda.maze.communication.CommunicatorFactory;
 import hemmouda.maze.game.GameInfo;
-import hemmouda.maze.game.player.PlayerFactory;
+import hemmouda.maze.game.logic.player.PlayerFactory;
 import hemmouda.maze.util.Logger;
 
 /**

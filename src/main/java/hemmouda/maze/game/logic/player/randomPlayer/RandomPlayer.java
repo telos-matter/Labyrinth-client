@@ -1,4 +1,4 @@
-package hemmouda.maze.game.player.randomPlayer;
+package hemmouda.maze.game.logic.player.randomPlayer;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;
@@ -8,8 +8,8 @@ import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.Treasure;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.game.GameInfo;
-import hemmouda.maze.game.player.Player;
-import hemmouda.maze.game.player.util.BoardUtil;
+import hemmouda.maze.game.logic.player.Player;
+import hemmouda.maze.game.logic.player.util.BoardUtil;
 import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Const;
 import hemmouda.maze.util.Logger;

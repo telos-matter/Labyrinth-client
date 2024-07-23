@@ -1,4 +1,4 @@
-package hemmouda.maze.game.player.bestTurnPlayer;
+package hemmouda.maze.game.logic.player.bestTurnPlayer;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;
@@ -8,10 +8,10 @@ import de.fhac.mazenet.server.generated.Treasure;
 import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.game.GameInfo;
-import hemmouda.maze.game.player.Player;
-import hemmouda.maze.game.player.bestTurnPlayer.core.MoveEvaluator;
-import hemmouda.maze.game.player.util.BoardUtil;
-import hemmouda.maze.game.player.util.Randomness;
+import hemmouda.maze.game.logic.player.Player;
+import hemmouda.maze.game.logic.player.bestTurnPlayer.core.MoveEvaluator;
+import hemmouda.maze.game.logic.player.util.BoardUtil;
+import hemmouda.maze.game.logic.player.util.Randomness;
 import hemmouda.maze.util.Const;
 
 import java.util.List;

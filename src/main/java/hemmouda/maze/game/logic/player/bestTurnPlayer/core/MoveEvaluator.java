@@ -1,14 +1,10 @@
-package hemmouda.maze.game.player.bestTurnPlayer.core;
+package hemmouda.maze.game.logic.player.bestTurnPlayer.core;
 
 import de.fhac.mazenet.server.game.Card;
 import de.fhac.mazenet.server.game.Position;
 import de.fhac.mazenet.server.generated.MoveMessageData;
-import hemmouda.maze.game.player.util.BoardUtil;
-import hemmouda.maze.game.player.util.Randomness;
-import hemmouda.maze.util.Const;
+import hemmouda.maze.game.logic.player.util.BoardUtil;
 import hemmouda.maze.util.Logger;
-
-import java.util.List;
 
 /**
  * Evaluates moves for BestTurnPlayer

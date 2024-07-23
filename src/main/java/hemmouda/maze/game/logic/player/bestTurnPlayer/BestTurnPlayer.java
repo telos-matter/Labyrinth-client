@@ -101,6 +101,7 @@ public final class BestTurnPlayer extends Player {
                     // Check if we can reach the treasure
                     if (position.equals(treasurePosition)) {
                         // If so, that is the move
+                        Logger.debug("%s found direct route to treasure!", this);
                         return MoveMessageUtil.construct(card, shiftPosition, position);
                     }
 
@@ -112,6 +113,7 @@ public final class BestTurnPlayer extends Player {
         }
 
         // If the treasure cannot be reached, return the best move
+        Logger.debug("%s couldn't find direct route to treasure, trying to go to %s instead.", this, alternativeGoal);
         return bestMove.constructMoveMessageData();
     }
 

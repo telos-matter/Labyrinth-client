@@ -13,6 +13,7 @@ import hemmouda.maze.game.logic.player.lookAheadPlayer.core.MoveEvaluator;
 import hemmouda.maze.game.logic.util.BoardUtil;
 import hemmouda.maze.game.logic.util.MoveMessageUtil;
 import hemmouda.maze.game.logic.util.Randomness;
+import hemmouda.maze.settings.Settings;
 import hemmouda.maze.util.Const;
 import hemmouda.maze.util.Logger;
 
@@ -32,11 +33,23 @@ public final class LookAheadPlayer extends Player {
         return instance;
     }
 
+    /**
+     * An alias for {@link Settings#TURNS_AHEAD}
+     * for easy access.
+     */
+    private int depth = -1;
+
     private LookAheadPlayer() {}
 
     @Override
     public void initialize() {
-        Logger.info("BestTurnPlayer has been initialized");
+        if (Settings.TURNS_AHEAD < 0) {
+            Logger.error("The value for TURNS_AHEAD must be greater than or equal to zero. Value provided: %d", Settings.TURNS_AHEAD);
+            throw new IllegalArgumentException("TURNS_AHEAD must be greater than or equal to zero");
+        }
+        depth = Settings.TURNS_AHEAD;
+
+        Logger.info("LookAheadPlayer has been initialized, and will look %d turn(s) into the future.", depth);
     }
 
     /**
@@ -122,6 +135,6 @@ public final class LookAheadPlayer extends Player {
 
     @Override
     public String toString() {
-        return "BestTurnPlayer";
+        return "LookAheadPlayer #" +depth;
     }
 }

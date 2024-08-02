@@ -1,4 +1,4 @@
-package hemmouda.maze.game.logic.player.bestTurnPlayer;
+package hemmouda.maze.game.logic.player.lookAheadPlayer;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;
@@ -9,7 +9,7 @@ import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.logic.player.Player;
-import hemmouda.maze.game.logic.player.bestTurnPlayer.core.MoveEvaluator;
+import hemmouda.maze.game.logic.player.lookAheadPlayer.core.MoveEvaluator;
 import hemmouda.maze.game.logic.util.BoardUtil;
 import hemmouda.maze.game.logic.util.MoveMessageUtil;
 import hemmouda.maze.game.logic.util.Randomness;
@@ -21,18 +21,18 @@ import java.util.List;
 /**
  * A player that plays the "best" move for the current turn
  */
-public final class BestTurnPlayer extends Player {
+public final class LookAheadPlayer extends Player {
 
-    private static BestTurnPlayer instance;
+    private static LookAheadPlayer instance;
 
-    public static BestTurnPlayer getInstance() {
+    public static LookAheadPlayer getInstance() {
         if (instance == null) {
-            instance = new BestTurnPlayer();
+            instance = new LookAheadPlayer();
         }
         return instance;
     }
 
-    private BestTurnPlayer() {}
+    private LookAheadPlayer() {}
 
     @Override
     public void initialize() {

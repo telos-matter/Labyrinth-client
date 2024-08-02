@@ -1,4 +1,4 @@
-package hemmouda.maze.game.logic.player.bestTurnPlayer.core;
+package hemmouda.maze.game.logic.player.lookAheadPlayer.core;
 
 import de.fhac.mazenet.server.game.Card;
 import de.fhac.mazenet.server.game.Position;

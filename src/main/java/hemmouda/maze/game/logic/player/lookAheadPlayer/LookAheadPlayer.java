@@ -89,7 +89,7 @@ public final class LookAheadPlayer extends Player {
      */
     @Override
     protected MoveMessageData think(Board board, Treasure currentTreasure, List<TreasuresToGoData> remainingTreasures) {
-        System.out.println("###########");
+        System.out.println("###########" + GameInfo.getTurnsCount());
         var move = exploreMoves(board, currentTreasure, Settings.TURNS_AHEAD);
         System.out.printf("playing this: %n");
         System.out.printf("insert at: %s and move to: %s%n" ,move.getShiftPosition(), move.getNewPinPos());

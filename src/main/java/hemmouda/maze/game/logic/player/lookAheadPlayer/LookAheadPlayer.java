@@ -155,10 +155,24 @@ public final class LookAheadPlayer extends Player {
                 Board boardAfter = BoardUtil.fakeInsert(board, shiftPosition, card);
                 Position treasurePosition = BoardUtil.getTreasurePosition(boardAfter, goal);
                 Position playerPosition = boardAfter.findPlayer(GameInfo.getPlayerId());
+
+
+//                if (GameInfo.getTurnsCount() == 5 && depth == 0 && boardAfter.getAllReachablePositions(playerPosition).contains(treasurePosition)) {
+//                    System.out.println("Right here");
+//                    var all = boardAfter.getAllReachablePositions(playerPosition);
+//                    System.out.println(all.size());
+//                    System.out.println(all.contains(treasurePosition));
+//                    System.out.println(playerPosition); // this shit right here. shifting does not update the player
+//                    var op = card.getOpenings();
+//                    System.out.printf("t: %s, r: %s, b: %s, l: %s%n", op.isTop(), op.isRight(), op.isBottom(), op.isLeft());
+//                }
+
+
                 // And for every reachable position within that board
                 for (Position position : boardAfter.getAllReachablePositions(playerPosition)) {
 
                     moveIndex++;
+
 
                     var move = MoveMessageUtil.construct(card, shiftPosition, position);
 

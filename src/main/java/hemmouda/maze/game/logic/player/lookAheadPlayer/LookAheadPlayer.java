@@ -156,7 +156,7 @@ public final class LookAheadPlayer extends Player {
                 Position treasurePosition = BoardUtil.getTreasurePosition(boardAfter, goal);
                 Position playerPosition = boardAfter.findPlayer(GameInfo.getPlayerId());
 
-
+                // no im retarded, why did i expect it to somehow know where it shoud move
 //                if (GameInfo.getTurnsCount() == 5 && depth == 0 && boardAfter.getAllReachablePositions(playerPosition).contains(treasurePosition)) {
 //                    System.out.println("Right here");
 //                    var all = boardAfter.getAllReachablePositions(playerPosition);

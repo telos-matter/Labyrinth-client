@@ -32,6 +32,14 @@
             <version>v2019.4</version>
         </dependency>
 
+        <!-- JavaUtil. Utilities that I use. -->
+        <!-- https://github.com/telos-matter/JavaUtil -->
+        <dependency>
+            <groupId>telos-matter</groupId>
+            <artifactId>java-util</artifactId>
+            <version>0.1</version>
+        </dependency>
+
         <!-- JAXB -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>

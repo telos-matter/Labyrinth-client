@@ -8,7 +8,9 @@ import de.fhac.mazenet.server.generated.PositionData;
 import de.fhac.mazenet.server.generated.Treasure;
 import hemmouda.maze.App;
 import hemmouda.maze.util.Const;
+import hemmouda.util.structures.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,6 +76,26 @@ public class BoardUtil {
         } else {
             return new Position(positionData);
         }
+    }
+
+    /**
+     * @return the possible insertions that can be done
+     * in this board. That is: all the rotations * all
+     * the possible insertion positions
+     */
+    public static List<Pair<Card, Position>> getAllInsertions (Board board) {
+        var rotations = new Card(board.getShiftCard()).getPossibleRotations();
+        var shiftPositions = BoardUtil.getAllShiftPositions(board);
+        int size = rotations.size() * shiftPositions.size();
+        var insertions = new ArrayList<Pair<Card, Position>>(size);
+
+        for (var rotation : rotations) {
+            for (var shiftPosition: shiftPositions) {
+                insertions.add(new Pair<>(rotation, shiftPosition));
+            }
+        }
+
+        return insertions;
     }
 
 }

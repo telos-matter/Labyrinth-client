@@ -83,10 +83,14 @@ public final class LookAheadPlayer extends Player {
      * that only differ in the players position
      * and not in the cards arrangement.</p>
      *
-     * <p>It worth mentioning that most treasures
-     * are reachable within two turns. It's
+     * <p>Of course more improvements
+     * and optimizations could be made,
+     * but most treasures
+     * are reachable within two turns, and it's
      * rare that it would require three turns. So this
-     * should be runnable on non-beefy machines easily.</p>
+     * implementation
+     * should be sufficient and should
+     * be runnable on non-beefy machines easily.</p>
      */
     @Override
     protected MoveMessageData think(Board board, Treasure treasure, List<TreasuresToGoData> remainingTreasures) {

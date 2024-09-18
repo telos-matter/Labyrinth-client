@@ -1,6 +1,6 @@
 package hemmouda.maze.game.logic.player;
 
-import hemmouda.maze.game.logic.player.inputPlayer.InputPlayer;
+import hemmouda.maze.game.logic.player.inputplayer.InputPlayer;
 import hemmouda.maze.game.logic.player.lookAheadPlayer.LookAheadPlayer;
 import hemmouda.maze.game.logic.player.nnPlayer.NnPlayer;
 import hemmouda.maze.game.logic.player.randomPlayer.RandomPlayer;

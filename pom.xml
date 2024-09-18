@@ -28,7 +28,7 @@
         <dependency>
             <groupId>de.fhac.mazenet</groupId>
             <artifactId>maze-server</artifactId>
-            <version>v2019.4</version>
+            <version>hemmouda-v0</version>
         </dependency>
 
         <!-- JavaUtil. Utilities that I use. -->

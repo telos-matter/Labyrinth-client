@@ -33,6 +33,7 @@ unzip maze-server.zip
 cd maze-server
 mvn clean install
 ```
+A couple of MacOs files (like .DS_Store and __MACOS) would be visible in the extracted folder, you can ignore them.
 - Another dependency is my own. Which can be downloaded from [here](https://github.com/telos-matter/JavaUtil) and then also installed locally. Like so:
 ```bash
 git clone https://github.com/telos-matter/JavaUtil

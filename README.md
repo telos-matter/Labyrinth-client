@@ -1,8 +1,8 @@
-# Maze client
+# Labyrinth client ![DEVELOPMENT STATUS: complete](https://badgen.net/badge/DEVELOPMENT%20STATUS/complete/green)
 
-My take on the maze client exercise.
+During my integration semester at the FH-Aachen, we were tasked with creating a client application that would be able to play the German game [Das verrückte Labyrinth](https://de.wikipedia.org/wiki/Das_verr%C3%BCckte_Labyrinth).
 
-The client application fulfills the requirement of providing a player that can communicate with the server and play the game.
+This is my take on that task.
 
 ## Project structure and development choices:
 The application is divided into two main sections, the communication and the players' logic.
@@ -25,19 +25,31 @@ The logic and actual implementation of the player is also abstracted away from t
 
 ## How-to:
 ### Requirements:
-A Maven dependency is required which can be downloaded from [here](https://github.com/telos-matter/JavaUtil) and then installed locally.
+- The server wasn't part of the task. Matter of fact, the server was provided and is even used as a dependency on this client side of things. And since the server is only accessible from within the FH-Aachen gitlab, I have provided a slightly modified copy of it [here](maze-server.zip). And so, if you want to try this client out, you'll need to extract it, and then install it as a Maven dependency locally. Like so:
+```bash
+git clone https://github.com/telos-matter/Labyrinth-client
+cd Labyrinth-client
+unzip maze-server.zip
+cd maze-server
+mvn clean install
+```
+- Another dependency is my own. Which can be downloaded from [here](https://github.com/telos-matter/JavaUtil) and then also installed locally. Like so:
+```bash
+git clone https://github.com/telos-matter/JavaUtil
+cd JavaUtil
+mvn clean install
+```
 ### Configuration:
 The client can be configured a bit trough the [config.properties](src/main/resources/config.properties) file. Such as choosing which player to use, and what not.
 ### Running:
-After starting the server and starting the game, simply run the following command:
+To start the game, you'll need to start the server first. You can find the command to do so in the server's README file.
+
+
+After starting the server and starting the game, simply run the following command in the client:
 ```bash
 mvn clean compile exec:java
 ```
 
 <hr>
 
-And that's that.
-
-A quick something: the provided server has a small bug in it that occurs after finishing the game when playing alone. The problem is that it XML schema expect there to be a maximum of 24 treasures, however, since the player's original position is also considered a treasure, when playing alone, the game has 25 treasures. And so an exception is thrown when trying to receive the final message. This can be easily fixed by changing the schema to allow for a maximum of 25 treasures.
-
-> HEMMOUDA Aymane
+And that's that. It was a nice project to work on.

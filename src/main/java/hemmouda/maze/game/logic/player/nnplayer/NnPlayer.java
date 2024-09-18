@@ -1,4 +1,4 @@
-package hemmouda.maze.game.logic.player.nnPlayer;
+package hemmouda.maze.game.logic.player.nnplayer;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.generated.MoveInfoData;

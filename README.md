@@ -5,7 +5,7 @@ My take on the maze client exercise.
 The client application fulfills the requirement of providing a player that can communicate with the server and play the game.
 
 ## Project structure and development choices:
-The application is divided into two main sections:
+The application is divided into two main sections, the communication and the players' logic.
 ### Communication:
 The communication with the game guides and orchestrates the client application. The implementation itself is abstracted from the rest of the components trough this interface [`Communicator.java`](src/main/java/hemmouda/maze/communication/Communicator.java).
 

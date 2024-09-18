@@ -5,11 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>hemmouda</groupId>
-    <artifactId>maze</artifactId>
+    <artifactId>maze-client</artifactId>
     <version>0.1</version>
-    <name>Maze client</name>
-    <description>The client part of the Maze project</description>
-    <url>https://git.fh-aachen.de/programmierpraktikum-ami/2024/hemmouda/maze</url>
+    <name>Labyrinth client</name>
+    <description>A client that can play the German board game Das verrückte Labyrinth</description>
     <packaging>jar</packaging>
     
     <properties>
@@ -25,7 +24,7 @@
 
     <dependencies>
         <!-- Maze server -->
-        <!-- https://git.fh-aachen.de/mazenet/maze-server -->
+        <!-- Provided with the project. Read the README.md -->
         <dependency>
             <groupId>de.fhac.mazenet</groupId>
             <artifactId>maze-server</artifactId>

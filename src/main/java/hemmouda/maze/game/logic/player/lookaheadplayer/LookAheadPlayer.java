@@ -1,4 +1,4 @@
-package hemmouda.maze.game.logic.player.lookAheadPlayer;
+package hemmouda.maze.game.logic.player.lookaheadplayer;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Position;
@@ -8,7 +8,7 @@ import de.fhac.mazenet.server.generated.MoveMessageData;
 import de.fhac.mazenet.server.generated.TreasuresToGoData;
 import hemmouda.maze.game.GameInfo;
 import hemmouda.maze.game.logic.player.Player;
-import hemmouda.maze.game.logic.player.lookAheadPlayer.core.LightBoard;
+import hemmouda.maze.game.logic.player.lookaheadplayer.core.LightBoard;
 import hemmouda.maze.game.logic.util.BoardUtil;
 import hemmouda.maze.game.logic.util.MoveMessageUtil;
 import hemmouda.maze.game.logic.util.Randomness;
@@ -78,7 +78,7 @@ public final class LookAheadPlayer extends Player {
      * previous levels in order to reach theirs.
      * That's it for speed, as for space; the
      * structure
-     * {@link hemmouda.maze.game.logic.player.lookAheadPlayer.core.LightBoard}
+     * {@link hemmouda.maze.game.logic.player.lookaheadplayer.core.LightBoard}
      * was created to avoid duplicate board copies
      * that only differ in the players position
      * and not in the cards arrangement.</p>

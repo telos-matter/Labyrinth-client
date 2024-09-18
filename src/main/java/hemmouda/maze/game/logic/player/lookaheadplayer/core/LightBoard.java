@@ -1,4 +1,4 @@
-package hemmouda.maze.game.logic.player.lookAheadPlayer.core;
+package hemmouda.maze.game.logic.player.lookaheadplayer.core;
 
 import de.fhac.mazenet.server.game.Board;
 import de.fhac.mazenet.server.game.Card;

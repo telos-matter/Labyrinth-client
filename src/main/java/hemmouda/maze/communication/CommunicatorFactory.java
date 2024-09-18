@@ -1,6 +1,6 @@
 package hemmouda.maze.communication;
 
-import hemmouda.maze.communication.localCommunicator.LocalCommunicator;
+import hemmouda.maze.communication.localcommunicator.LocalCommunicator;
 import hemmouda.maze.communication.serverCommunicator.ServerCommunicator;
 import hemmouda.maze.settings.Settings;
 

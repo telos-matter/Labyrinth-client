@@ -1,4 +1,4 @@
-package hemmouda.maze.communication.localCommunicator;
+package hemmouda.maze.communication.localcommunicator;
 
 import hemmouda.maze.communication.Communicator;
 

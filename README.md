@@ -52,4 +52,4 @@ mvn clean compile exec:java
 
 <hr>
 
-And that's that. It was a nice project to work on.
+And that's that. It was a nice exercise to work on.
